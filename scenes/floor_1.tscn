@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dnmwpuedwbmsp"]
+
+[ext_resource type="PackedScene" uid="uid://vyeeaf5x6mjm" path="res://raw/floor-1.blend" id="1_dc4yy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ee51a"]
+transparency = 1
+albedo_color = Color(0.568627, 0.709804, 0.792157, 0.556863)
+metallic = 0.57
+roughness = 0.15
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_4rq4d"]
+size = Vector3(18.355, 3.28, 18.355)
+
+[node name="floor-1" instance=ExtResource("1_dc4yy")]
+
+[node name="windows" parent="." index="3"]
+surface_material_override/0 = SubResource("StandardMaterial3D_ee51a")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.342, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" index="0"]
+shape = SubResource("BoxShape3D_4rq4d")

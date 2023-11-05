@@ -15,15 +15,17 @@ func _ready():
 
 func _process(delta):
 	if abs(global_position.distance_to(target_step.global_position)) > step_distance and (neighbour == null or neighbour.stepping == false):
-		stepping = true
 		step()
-	else:
-		stepping = false
 
 func step():
+	stepping = true
+	
 	var target_pos = target_step.global_position
 	var half_way = (global_position + target_step.global_position)/2
 	var t = get_tree().create_tween()
 	t.tween_property(self, "global_position", half_way, 0.1/speed_move)
 	t.tween_property(self, "global_position", target_pos, 0.1/speed_move)
+	t.finished.connect(func():
+		stepping = false
+		)
 

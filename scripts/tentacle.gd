@@ -7,6 +7,7 @@ class_name Tentacle
 @onready var target_step : Marker3D = $Armature/target_step_container/target_step_cast/target_step
 @onready var target_step_cast : TentacleTargetStep = $Armature/target_step_container/target_step_cast
 @onready var target_step_container = $Armature/target_step_container
+@onready var target_step_under_cast = $Armature/target_step_container/target_step_under_cast
 
 var prev_pos := Vector3.ZERO
 var offset : float = 20.0
