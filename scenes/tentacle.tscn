@@ -1,0 +1,54 @@
+[gd_scene load_steps=10 format=3 uid="uid://cngm45w67n7qa"]
+
+[ext_resource type="PackedScene" uid="uid://64eleh7ydmn3" path="res://raw/tentacle.blend" id="1_dlp8m"]
+[ext_resource type="Script" path="res://scripts/tentacle.gd" id="2_h5sx8"]
+[ext_resource type="Script" path="res://scripts/tentacle_ik.gd" id="2_j8id8"]
+[ext_resource type="Script" path="res://scripts/tentacle_target_ik.gd" id="4_c80dg"]
+[ext_resource type="Script" path="res://scripts/tentacle_target_step.gd" id="4_f4mfy"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jl8eg"]
+albedo_color = Color(0, 0.631373, 0.443137, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_o5388"]
+material = SubResource("StandardMaterial3D_jl8eg")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tyvn"]
+albedo_color = Color(1, 0, 0, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_4gomt"]
+material = SubResource("StandardMaterial3D_5tyvn")
+
+[node name="tentacle" instance=ExtResource("1_dlp8m")]
+script = ExtResource("2_h5sx8")
+
+[node name="ik" type="SkeletonIK3D" parent="Armature/Skeleton3D" index="1"]
+process_priority = 1
+root_bone = &"Bone"
+tip_bone = &"Bone.007"
+use_magnet = true
+magnet = Vector3(0, 10, 0)
+target_node = NodePath("../../target_ik")
+script = ExtResource("2_j8id8")
+
+[node name="target_ik" type="Marker3D" parent="Armature" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.47474, 3.17887)
+top_level = true
+script = ExtResource("4_c80dg")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature/target_ik" index="0"]
+visible = false
+mesh = SubResource("SphereMesh_o5388")
+
+[node name="target_step_container" type="Node3D" parent="Armature" index="2"]
+
+[node name="target_step_cast" type="RayCast3D" parent="Armature/target_step_container" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.987419, 0.158124, 0, -0.158124, 0.987419, 0, 6.96266, 1.64254)
+target_position = Vector3(0, -20, 0)
+script = ExtResource("4_f4mfy")
+
+[node name="target_step" type="Marker3D" parent="Armature/target_step_container/target_step_cast" index="0"]
+transform = Transform3D(1, 0, 0, 0, 0.999429, -0.0338179, 0, 0.0338179, 0.999429, 0, -8.58624, 0.137502)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature/target_step_container/target_step_cast/target_step" index="0"]
+visible = false
+mesh = SubResource("SphereMesh_4gomt")
