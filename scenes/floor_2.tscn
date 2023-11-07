@@ -1,13 +1,273 @@
-[gd_scene load_steps=3 format=3 uid="uid://c305tx8g7ciba"]
+[gd_scene load_steps=8 format=3 uid="uid://c305tx8g7ciba"]
 
 [ext_resource type="PackedScene" uid="uid://my0idvbaonr2" path="res://scenes/window_1.tscn" id="1_sddx1"]
+[ext_resource type="Shader" uid="uid://b8k6mr7qboute" path="res://shaders/cement.tres" id="1_tmhvr"]
+[ext_resource type="Texture2D" uid="uid://c8aiy35xfmf4g" path="res://raw/noise_1.png" id="2_haj18"]
+[ext_resource type="PackedScene" uid="uid://c1j2hcrng5lsk" path="res://scenes/person_1.tscn" id="4_24km8"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_kh6ed"]
-size = Vector3(100, 0.1, 100)
+size = Vector3(48.5, 0.3, 48.5)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_loo5b"]
+render_priority = 0
+shader = ExtResource("1_tmhvr")
+shader_parameter/triplanar_scale = Vector3(1, 1, 1)
+shader_parameter/triplanar_offset = null
+shader_parameter/triplanar_sharpness = 0.5
+shader_parameter/TextureParameterTriplanar = ExtResource("2_haj18")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3sx1p"]
+size = Vector3(48, 7, 48)
 
 [node name="floor-2" type="Node3D"]
 
-[node name="window-1" parent="." instance=ExtResource("1_sddx1")]
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="floor" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_kh6ed")
+surface_material_override/0 = SubResource("ShaderMaterial_loo5b")
+
+[node name="floor_windows" type="Node3D" parent="."]
+
+[node name="windows" type="Node3D" parent="floor_windows"]
+
+[node name="window-1" parent="floor_windows/windows" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 24)
+
+[node name="window-2" parent="floor_windows/windows" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 24)
+
+[node name="window-3" parent="floor_windows/windows" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 24)
+
+[node name="window-4" parent="floor_windows/windows" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 24)
+
+[node name="window-5" parent="floor_windows/windows" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 24)
+
+[node name="window-6" parent="floor_windows/windows" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 24)
+
+[node name="window-7" parent="floor_windows/windows" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 24)
+
+[node name="window-8" parent="floor_windows/windows" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 24)
+
+[node name="window-9" parent="floor_windows/windows" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 24)
+
+[node name="window-10" parent="floor_windows/windows" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 24)
+
+[node name="window-11" parent="floor_windows/windows" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 24)
+
+[node name="window-12" parent="floor_windows/windows" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 24)
+
+[node name="windows2" type="Node3D" parent="floor_windows"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+
+[node name="window-1" parent="floor_windows/windows2" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 24)
+
+[node name="window-2" parent="floor_windows/windows2" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 24)
+
+[node name="window-3" parent="floor_windows/windows2" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 24)
+
+[node name="window-4" parent="floor_windows/windows2" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 24)
+
+[node name="window-5" parent="floor_windows/windows2" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 24)
+
+[node name="window-6" parent="floor_windows/windows2" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 24)
+
+[node name="window-7" parent="floor_windows/windows2" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 24)
+
+[node name="window-8" parent="floor_windows/windows2" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 24)
+
+[node name="window-9" parent="floor_windows/windows2" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 24)
+
+[node name="window-10" parent="floor_windows/windows2" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 24)
+
+[node name="window-11" parent="floor_windows/windows2" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 24)
+
+[node name="window-12" parent="floor_windows/windows2" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 24)
+
+[node name="windows3" type="Node3D" parent="floor_windows"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 0)
+
+[node name="window-1" parent="floor_windows/windows3" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 24)
+
+[node name="window-2" parent="floor_windows/windows3" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 24)
+
+[node name="window-3" parent="floor_windows/windows3" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 24)
+
+[node name="window-4" parent="floor_windows/windows3" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 24)
+
+[node name="window-5" parent="floor_windows/windows3" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 24)
+
+[node name="window-6" parent="floor_windows/windows3" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 24)
+
+[node name="window-7" parent="floor_windows/windows3" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 24)
+
+[node name="window-8" parent="floor_windows/windows3" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 24)
+
+[node name="window-9" parent="floor_windows/windows3" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 24)
+
+[node name="window-10" parent="floor_windows/windows3" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 24)
+
+[node name="window-11" parent="floor_windows/windows3" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 24)
+
+[node name="window-12" parent="floor_windows/windows3" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 24)
+
+[node name="windows4" type="Node3D" parent="floor_windows"]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, 0, 0, 0)
+
+[node name="window-1" parent="floor_windows/windows4" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -22, 0, 24)
+
+[node name="window-2" parent="floor_windows/windows4" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18, 0, 24)
+
+[node name="window-3" parent="floor_windows/windows4" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14, 0, 24)
+
+[node name="window-4" parent="floor_windows/windows4" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10, 0, 24)
+
+[node name="window-5" parent="floor_windows/windows4" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6, 0, 24)
+
+[node name="window-6" parent="floor_windows/windows4" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 24)
+
+[node name="window-7" parent="floor_windows/windows4" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 24)
+
+[node name="window-8" parent="floor_windows/windows4" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6, 0, 24)
+
+[node name="window-9" parent="floor_windows/windows4" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 0, 24)
+
+[node name="window-10" parent="floor_windows/windows4" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14, 0, 24)
+
+[node name="window-11" parent="floor_windows/windows4" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, 0, 24)
+
+[node name="window-12" parent="floor_windows/windows4" instance=ExtResource("1_sddx1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 24)
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
+shape = SubResource("BoxShape3D_3sx1p")
+
+[node name="person-1" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3824, 0.125, -18.2915)
+
+[node name="person-2" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.82197, 0.125, -0.163197)
+
+[node name="person-3" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5593, 0.125, 7.23724)
+
+[node name="person-4" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47804, 0.125, 7.23724)
+
+[node name="person-5" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47804, 0.125, -0.487112)
+
+[node name="person-6" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.853, 0.125, -0.487112)
+
+[node name="person-7" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.853, 0.125, -3.88478)
+
+[node name="person-8" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.90292, 0.125, -3.88478)
+
+[node name="person-9" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.90292, 0.125, -11.484)
+
+[node name="person-10" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4626, 0.125, -11.484)
+
+[node name="person-11" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.02, 0.125, 13.0203)
+
+[node name="person-12" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.546, 0.125, 13.0203)
+
+[node name="person-13" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.546, 0.125, 16.459)
+
+[node name="person-14" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.81391, 0.125, 16.459)
+
+[node name="person-15" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.81391, 0.125, 12.7673)
+
+[node name="person-16" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.93616, 0.125, 12.7673)
+
+[node name="person-17" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.93616, 0.125, 17.2232)
+
+[node name="person-18" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.3757, 0.125, 17.2232)
+
+[node name="person-19" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.3757, 0.125, 22.2504)
+
+[node name="person-20" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2945, 0.125, 22.2504)
+
+[node name="person-21" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0479279, 0.125, 22.2504)
+
+[node name="person-22" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.358, 0.125, 22.2504)
+
+[node name="person-23" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.358, 0.125, -3.22054)
+
+[node name="person-24" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.358, 0.125, -20.4134)
+
+[node name="person-25" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.68118, 0.125, -20.4134)
+
+[node name="person-26" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.68118, 0.125, -9.45533)
+
+[node name="person-27" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.83968, 0.125, -14.0303)
+
+[node name="person-28" parent="." instance=ExtResource("4_24km8")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.83968, 0.125, -14.0303)

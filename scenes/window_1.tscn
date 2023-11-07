@@ -1,11 +1,11 @@
-[gd_scene load_steps=7 format=3 uid="uid://my0idvbaonr2"]
+[gd_scene load_steps=8 format=3 uid="uid://my0idvbaonr2"]
 
 [ext_resource type="PackedScene" uid="uid://cob1bii058rtr" path="res://raw/window-1.blend" id="1_v4125"]
 [ext_resource type="Script" path="res://scripts/window.gd" id="2_lvtji"]
 [ext_resource type="Material" uid="uid://be5ri0dpgxnf4" path="res://materials/glass.tres" id="2_sajpc"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_o7j2g"]
-points = PackedVector3Array(-1.89215, -3.21162, -0.0236396, -1.89215, -3.21162, 0.023635, -1.89215, 3.21162, -0.0236396, 1.89215, -3.21162, -0.0236396, 1.89215, -3.21162, 0.023635, -1.89215, 3.21162, 0.0236396, 1.89215, 3.21162, -0.0236396, 1.89215, 3.21162, 0.0236396)
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_oj2wc"]
+points = PackedVector3Array(1.97471, 3.51577, 0.0293714, -1.94517, -3.26457, -0.0765714, -1.94517, -3.26457, 0.0293714, -1.94517, 3.51577, -0.0765714, 1.97471, -3.26457, -0.0765714, 1.97471, -3.26457, 0.0293714, -1.94517, 3.51577, 0.0293714, 1.97471, 3.51577, -0.0765714)
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_tpewt"]
 emission_shape = 3
@@ -17,6 +17,9 @@ initial_velocity_max = 5.0
 
 [sub_resource type="BoxMesh" id="BoxMesh_uqvw7"]
 size = Vector3(1, 1, 0.1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_f13m4"]
+points = PackedVector3Array(2.05556, 3.72436, 0.177778, -2.05556, -3.38536, -0.155556, -2.05556, -3.38536, 0.177778, -2.05556, 3.72436, -0.155556, 2.05556, -3.38536, -0.155556, 2.05556, -3.38536, 0.177778, -2.05556, 3.72436, 0.177778, 2.05556, 3.72436, -0.155556)
 
 [node name="window-1" instance=ExtResource("1_v4125")]
 script = ExtResource("2_lvtji")
@@ -30,9 +33,9 @@ surface_material_override/0 = ExtResource("2_sajpc")
 
 [node name="window_area" type="Area3D" parent="." index="3"]
 
-[node name="shape" type="CollisionShape3D" parent="window_area" index="0"]
+[node name="inner_shape" type="CollisionShape3D" parent="window_area" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.33043, 0.00803711)
-shape = SubResource("ConvexPolygonShape3D_o7j2g")
+shape = SubResource("ConvexPolygonShape3D_oj2wc")
 
 [node name="shatter" type="GPUParticles3D" parent="." index="4"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.67884, 0)
@@ -45,5 +48,11 @@ randomness = 0.21
 process_material = SubResource("ParticleProcessMaterial_tpewt")
 draw_pass_1 = SubResource("BoxMesh_uqvw7")
 
-[connection signal="area_entered" from="window_area" to="." method="_on_window_area_area_entered"]
-[connection signal="body_entered" from="window_area" to="." method="_on_window_area_body_entered"]
+[node name="col" type="StaticBody3D" parent="." index="5"]
+
+[node name="outer_shape" type="CollisionShape3D" parent="col" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.33047, 0)
+shape = SubResource("ConvexPolygonShape3D_f13m4")
+
+[connection signal="area_entered" from="window_area" to="." method="_on_window_area_area_entered" flags=18]
+[connection signal="body_entered" from="window_area" to="." method="_on_window_area_body_entered" flags=18]
