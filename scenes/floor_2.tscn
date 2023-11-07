@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://c305tx8g7ciba"]
+
+[ext_resource type="PackedScene" uid="uid://my0idvbaonr2" path="res://scenes/window_1.tscn" id="1_sddx1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kh6ed"]
+size = Vector3(100, 0.1, 100)
+
+[node name="floor-2" type="Node3D"]
+
+[node name="window-1" parent="." instance=ExtResource("1_sddx1")]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_kh6ed")

@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://c1j2hcrng5lsk"]
+
+[ext_resource type="PackedScene" uid="uid://boohk1saw4i12" path="res://raw/person-1.blend" id="1_serxh"]
+[ext_resource type="Script" path="res://scripts/person_1.gd" id="2_xy4fl"]
+
+[node name="person-1" instance=ExtResource("1_serxh")]
+script = ExtResource("2_xy4fl")
+
+[node name="hair-1" parent="." index="1"]
+visible = false
+
+[node name="hair-2" parent="." index="2"]
+visible = false
+
+[node name="hair-3" parent="." index="3"]
+visible = false
+
+[node name="hair-4" parent="." index="4"]
+visible = false
+
+[node name="hair-5" parent="." index="5"]
+visible = false
+
+[node name="hair-6" parent="." index="6"]
+visible = false
+
+[node name="hair-7" parent="." index="7"]
+visible = false
+
+[node name="hair-8" parent="." index="8"]
+visible = false

@@ -21,15 +21,6 @@ albedo_color = Color(0.823529, 0, 0.192157, 1)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 script = ExtResource("1_uwglo")
 
-[node name="body" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("SphereMesh_k3ci3")
-
-[node name="body2" type="MeshInstance3D" parent="."]
-transform = Transform3D(-4.69897e-08, 0, -0.615, 0, 0.98, 0, 1.075, 0, -2.68825e-08, 0, 1.773, -0.208)
-mesh = SubResource("SphereMesh_pfie5")
-surface_material_override/0 = SubResource("StandardMaterial3D_lo8vh")
-
 [node name="limb_center" type="Marker3D" parent="."]
 
 [node name="ground_ray" type="RayCast3D" parent="."]
@@ -40,8 +31,15 @@ target_position = Vector3(0, -10, 0)
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 target_position = Vector3(0, -20, 0)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.63586, 0)
-light_energy = 2.508
-shadow_enabled = true
-omni_range = 34.5825
+[node name="body" type="Node3D" parent="."]
+
+[node name="body" type="MeshInstance3D" parent="body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("SphereMesh_k3ci3")
+skeleton = NodePath("../..")
+
+[node name="body2" type="MeshInstance3D" parent="body"]
+transform = Transform3D(-4.69897e-08, 0, -0.615, 0, 0.98, 0, 1.075, 0, -2.68825e-08, 0, 1.773, -0.208)
+mesh = SubResource("SphereMesh_pfie5")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_lo8vh")

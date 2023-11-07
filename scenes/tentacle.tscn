@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://cngm45w67n7qa"]
+[gd_scene load_steps=11 format=3 uid="uid://cngm45w67n7qa"]
 
 [ext_resource type="PackedScene" uid="uid://64eleh7ydmn3" path="res://raw/tentacle.blend" id="1_dlp8m"]
 [ext_resource type="Script" path="res://scripts/tentacle.gd" id="2_h5sx8"]
@@ -11,6 +11,8 @@ albedo_color = Color(0, 0.631373, 0.443137, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_o5388"]
 material = SubResource("StandardMaterial3D_jl8eg")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mdii6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tyvn"]
 albedo_color = Color(1, 0, 0, 1)
@@ -38,6 +40,11 @@ script = ExtResource("4_c80dg")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Armature/target_ik" index="0"]
 visible = false
 mesh = SubResource("SphereMesh_o5388")
+
+[node name="Area3D" type="Area3D" parent="Armature/target_ik" index="1"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/target_ik/Area3D" index="0"]
+shape = SubResource("SphereShape3D_mdii6")
 
 [node name="target_step_container" type="Node3D" parent="Armature" index="2"]
 
