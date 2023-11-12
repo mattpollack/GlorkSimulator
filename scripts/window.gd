@@ -27,5 +27,6 @@ func break_glass() -> void:
 func _on_window_area_area_entered(area):
 	break_glass()
 
-#func _on_window_area_body_entered(body):
+func _on_window_area_body_entered(body):
+	return
 #	break_glass()

@@ -8,6 +8,7 @@ class_name Tentacle
 @onready var target_step_cast : TentacleTargetStep = $Armature/target_step_container/target_step_cast
 @onready var target_step_container = $Armature/target_step_container
 @onready var target_step_under_cast = $Armature/target_step_container/target_step_under_cast
+@onready var tentacle_tip_shape : CollisionShape3D = $Armature/target_ik/Area3D/tentacle_tip_shape
 
 var prev_pos := Vector3.ZERO
 var offset : float = 20.0

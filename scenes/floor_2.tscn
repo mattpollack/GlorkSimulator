@@ -188,86 +188,88 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 22, 0, 24)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.5, 0)
 shape = SubResource("BoxShape3D_3sx1p")
 
-[node name="person-1" parent="." instance=ExtResource("4_24km8")]
+[node name="people" type="Node3D" parent="."]
+
+[node name="person-1" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -16.3824, 0.125, -18.2915)
 
-[node name="person-2" parent="." instance=ExtResource("4_24km8")]
+[node name="person-2" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.82197, 0.125, -0.163197)
 
-[node name="person-3" parent="." instance=ExtResource("4_24km8")]
+[node name="person-3" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.5593, 0.125, 7.23724)
 
-[node name="person-4" parent="." instance=ExtResource("4_24km8")]
+[node name="person-4" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47804, 0.125, 7.23724)
 
-[node name="person-5" parent="." instance=ExtResource("4_24km8")]
+[node name="person-5" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.47804, 0.125, -0.487112)
 
-[node name="person-6" parent="." instance=ExtResource("4_24km8")]
+[node name="person-6" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.853, 0.125, -0.487112)
 
-[node name="person-7" parent="." instance=ExtResource("4_24km8")]
+[node name="person-7" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -18.853, 0.125, -3.88478)
 
-[node name="person-8" parent="." instance=ExtResource("4_24km8")]
+[node name="person-8" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.90292, 0.125, -3.88478)
 
-[node name="person-9" parent="." instance=ExtResource("4_24km8")]
+[node name="person-9" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.90292, 0.125, -11.484)
 
-[node name="person-10" parent="." instance=ExtResource("4_24km8")]
+[node name="person-10" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.4626, 0.125, -11.484)
 
-[node name="person-11" parent="." instance=ExtResource("4_24km8")]
+[node name="person-11" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.02, 0.125, 13.0203)
 
-[node name="person-12" parent="." instance=ExtResource("4_24km8")]
+[node name="person-12" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.546, 0.125, 13.0203)
 
-[node name="person-13" parent="." instance=ExtResource("4_24km8")]
+[node name="person-13" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13.546, 0.125, 16.459)
 
-[node name="person-14" parent="." instance=ExtResource("4_24km8")]
+[node name="person-14" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.81391, 0.125, 16.459)
 
-[node name="person-15" parent="." instance=ExtResource("4_24km8")]
+[node name="person-15" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.81391, 0.125, 12.7673)
 
-[node name="person-16" parent="." instance=ExtResource("4_24km8")]
+[node name="person-16" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.93616, 0.125, 12.7673)
 
-[node name="person-17" parent="." instance=ExtResource("4_24km8")]
+[node name="person-17" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.93616, 0.125, 17.2232)
 
-[node name="person-18" parent="." instance=ExtResource("4_24km8")]
+[node name="person-18" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.3757, 0.125, 17.2232)
 
-[node name="person-19" parent="." instance=ExtResource("4_24km8")]
+[node name="person-19" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -19.3757, 0.125, 22.2504)
 
-[node name="person-20" parent="." instance=ExtResource("4_24km8")]
+[node name="person-20" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.2945, 0.125, 22.2504)
 
-[node name="person-21" parent="." instance=ExtResource("4_24km8")]
+[node name="person-21" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0479279, 0.125, 22.2504)
 
-[node name="person-22" parent="." instance=ExtResource("4_24km8")]
+[node name="person-22" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.358, 0.125, 22.2504)
 
-[node name="person-23" parent="." instance=ExtResource("4_24km8")]
+[node name="person-23" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.358, 0.125, -3.22054)
 
-[node name="person-24" parent="." instance=ExtResource("4_24km8")]
+[node name="person-24" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18.358, 0.125, -20.4134)
 
-[node name="person-25" parent="." instance=ExtResource("4_24km8")]
+[node name="person-25" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.68118, 0.125, -20.4134)
 
-[node name="person-26" parent="." instance=ExtResource("4_24km8")]
+[node name="person-26" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.68118, 0.125, -9.45533)
 
-[node name="person-27" parent="." instance=ExtResource("4_24km8")]
+[node name="person-27" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.83968, 0.125, -14.0303)
 
-[node name="person-28" parent="." instance=ExtResource("4_24km8")]
+[node name="person-28" parent="people" instance=ExtResource("4_24km8")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.83968, 0.125, -14.0303)

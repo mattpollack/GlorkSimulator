@@ -33,23 +33,23 @@ target_node = NodePath("../../target_ik")
 script = ExtResource("2_j8id8")
 
 [node name="target_ik" type="Marker3D" parent="Armature" index="1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.47474, 3.17887)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.47474, 5.73634)
 top_level = true
 script = ExtResource("4_c80dg")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature/target_ik" index="0"]
+[node name="_ref" type="MeshInstance3D" parent="Armature/target_ik" index="0"]
 visible = false
 mesh = SubResource("SphereMesh_o5388")
 
 [node name="Area3D" type="Area3D" parent="Armature/target_ik" index="1"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Armature/target_ik/Area3D" index="0"]
+[node name="tentacle_tip_shape" type="CollisionShape3D" parent="Armature/target_ik/Area3D" index="0"]
 shape = SubResource("SphereShape3D_mdii6")
 
 [node name="target_step_container" type="Node3D" parent="Armature" index="2"]
 
 [node name="target_step_cast" type="RayCast3D" parent="Armature/target_step_container" index="0"]
-transform = Transform3D(1, 0, 0, 0, 0.987419, 0.158124, 0, -0.158124, 0.987419, 0, 6.96266, 1.64254)
+transform = Transform3D(1, 0, 0, 0, 0.987419, 0.158124, 0, -0.158124, 0.987419, 0, 6.96266, 4.20001)
 target_position = Vector3(0, -20, 0)
 debug_shape_custom_color = Color(0.827451, 0, 0.94902, 1)
 debug_shape_thickness = 5
@@ -58,12 +58,12 @@ script = ExtResource("4_f4mfy")
 [node name="target_step" type="Marker3D" parent="Armature/target_step_container/target_step_cast" index="0"]
 transform = Transform3D(1, 0, 0, 0, 0.999429, -0.0338179, 0, 0.0338179, 0.999429, 0, -8.58624, 0.137502)
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Armature/target_step_container/target_step_cast/target_step" index="0"]
+[node name="_ref" type="MeshInstance3D" parent="Armature/target_step_container/target_step_cast/target_step" index="0"]
 visible = false
 mesh = SubResource("SphereMesh_4gomt")
 
 [node name="target_step_under_cast" type="RayCast3D" parent="Armature/target_step_container" index="1"]
-transform = Transform3D(1, 0, 0, 0, 0.678391, -0.734701, 0, 0.734701, 0.678391, 0, 5.60983, 10.9545)
+transform = Transform3D(1, 0, 0, 0, 0.678391, -0.734701, 0, 0.734701, 0.678391, 0, 5.60983, 13.512)
 target_position = Vector3(0, -20, 0)
 debug_shape_custom_color = Color(0, 0.556863, 0.380392, 1)
 debug_shape_thickness = 5

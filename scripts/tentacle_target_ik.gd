@@ -4,7 +4,7 @@ class_name TentacleTargetIK
 
 @onready var target_step : Marker3D = $"../target_step_container/target_step_cast/target_step"
 
-@export var step_distance : float = 6
+@export var step_distance : float = 16
 @export var speed_move : float = 6
 @export var neighbour : TentacleTargetIK
 
