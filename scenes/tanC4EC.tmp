@@ -1,0 +1,41 @@
+[gd_scene load_steps=7 format=3 uid="uid://lkhf6v8nu6on"]
+
+[ext_resource type="PackedScene" uid="uid://bwjhi2cp6nolr" path="res://raw/tank.blend" id="1_jc0io"]
+[ext_resource type="Script" path="res://scripts/tank.gd" id="2_l5q2k"]
+
+[sub_resource type="Curve" id="Curve_vacpf"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.212963, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_d6r3c"]
+curve = SubResource("Curve_vacpf")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_mg3pk"]
+direction = Vector3(0, 0, 1)
+spread = 90.75
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 14.58
+initial_velocity_max = 14.58
+scale_curve = SubResource("CurveTexture_d6r3c")
+
+[sub_resource type="SphereMesh" id="SphereMesh_8rnu5"]
+
+[node name="tank" instance=ExtResource("1_jc0io")]
+script = ExtResource("2_l5q2k")
+
+[node name="bullet_start" type="Node3D" parent="gun" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.19687)
+
+[node name="muzzle" type="GPUParticles3D" parent="gun/bullet_start" index="0"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 0)
+emitting = false
+amount = 20
+one_shot = true
+speed_scale = 2.07
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_mg3pk")
+draw_pass_1 = SubResource("SphereMesh_8rnu5")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." index="4"]
+path_max_distance = 14.81
+path_metadata_flags = 0

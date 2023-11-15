@@ -4,7 +4,7 @@ var rad = 50000
 var angle : float = 0
 
 func _process(delta):
-	angle += delta / 10
+	angle += delta / 100
 
 	var x = sin(angle) * rad
 	var y = cos(angle) * rad

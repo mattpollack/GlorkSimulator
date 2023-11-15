@@ -1,18 +1,19 @@
-[gd_scene load_steps=11 format=3 uid="uid://cngm45w67n7qa"]
+[gd_scene load_steps=12 format=3 uid="uid://cngm45w67n7qa"]
 
 [ext_resource type="PackedScene" uid="uid://64eleh7ydmn3" path="res://raw/tentacle.blend" id="1_dlp8m"]
 [ext_resource type="Script" path="res://scripts/tentacle.gd" id="2_h5sx8"]
 [ext_resource type="Script" path="res://scripts/tentacle_ik.gd" id="2_j8id8"]
 [ext_resource type="Script" path="res://scripts/tentacle_target_ik.gd" id="4_c80dg"]
+[ext_resource type="Script" path="res://scripts/tentacle_attack_place.gd" id="4_etxsv"]
 [ext_resource type="Script" path="res://scripts/tentacle_target_step.gd" id="4_f4mfy"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mdii6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jl8eg"]
 albedo_color = Color(0, 0.631373, 0.443137, 1)
 
 [sub_resource type="SphereMesh" id="SphereMesh_o5388"]
 material = SubResource("StandardMaterial3D_jl8eg")
-
-[sub_resource type="SphereShape3D" id="SphereShape3D_mdii6"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5tyvn"]
 albedo_color = Color(1, 0, 0, 1)
@@ -31,6 +32,20 @@ use_magnet = true
 magnet = Vector3(0, 10, 0)
 target_node = NodePath("../../target_ik")
 script = ExtResource("2_j8id8")
+
+[node name="tentacle_end" type="BoneAttachment3D" parent="Armature/Skeleton3D" index="2"]
+transform = Transform3D(1, 4.93038e-32, -4.93038e-32, -6.77239e-32, 0.518569, -0.855036, -1.65891e-32, 0.855036, 0.518569, 0, 3.42889, 5.65368)
+bone_name = "Bone.007"
+bone_idx = 7
+
+[node name="attack_place" type="Area3D" parent="Armature/Skeleton3D/tentacle_end" index="0" groups=["attack"]]
+script = ExtResource("4_etxsv")
+
+[node name="attack_place_shape" type="CollisionShape3D" parent="Armature/Skeleton3D/tentacle_end/attack_place" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0117141, 0.00868654)
+shape = SubResource("SphereShape3D_mdii6")
+
+[node name="caught_objects" type="Node3D" parent="Armature/Skeleton3D/tentacle_end/attack_place" index="1"]
 
 [node name="target_ik" type="Marker3D" parent="Armature" index="1"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.47474, 5.73634)

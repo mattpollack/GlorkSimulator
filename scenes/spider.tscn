@@ -1,18 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://d1v7ih4rnhvv7"]
+[gd_scene load_steps=4 format=3 uid="uid://d1v7ih4rnhvv7"]
 
 [ext_resource type="Script" path="res://scripts/spider.gd" id="1_uwglo"]
 [ext_resource type="PackedScene" uid="uid://coyhv5qg7c5j2" path="res://raw/player.blend" id="2_87052"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_3lasl"]
+radius = 9.39345
 
 [node name="spider" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 script = ExtResource("1_uwglo")
 
-[node name="limb_center" type="Marker3D" parent="."]
+[node name="limb_leg_center" type="Marker3D" parent="."]
+
+[node name="limb_arm_center" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65032, 0)
 
 [node name="body" type="Node3D" parent="."]
 
-[node name="player" parent="body" instance=ExtResource("2_87052")]
-transform = Transform3D(1.685, 0, 0, 0, 1.685, 0, 0, 0, 1.685, 0, 2.1018, 0)
+[node name="player2" parent="body" instance=ExtResource("2_87052")]
+transform = Transform3D(1.63, 0, 0, 0, 1.63, 0, 0, 0, 1.63, 0, 2.79637, 0)
+
+[node name="reach_area" type="Area3D" parent="body/player2"]
+
+[node name="col" type="CollisionShape3D" parent="body/player2/reach_area"]
+shape = SubResource("SphereShape3D_3lasl")
+
+[node name="aim_at_me" type="Node3D" parent="body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.9922, 0)
+
+[node name="width_anchor" type="Node3D" parent="body"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56905, 2.9922, 0)
 
 [node name="ground_rays" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.12225, 0)
+
+[connection signal="area_entered" from="body/player2/reach_area" to="." method="_on_reach_area_area_entered"]
+[connection signal="area_exited" from="body/player2/reach_area" to="." method="_on_reach_area_area_exited"]
+[connection signal="body_entered" from="body/player2/reach_area" to="." method="_on_reach_area_body_entered"]
+[connection signal="body_exited" from="body/player2/reach_area" to="." method="_on_reach_area_body_exited"]

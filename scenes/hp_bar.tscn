@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://dr6hcaekixsic"]
+
+[ext_resource type="Script" path="res://scripts/hp_bar.gd" id="1_0bumu"]
+
+[node name="hp" type="Sprite3D"]
+pixel_size = 0.04
+billboard = 1
+texture_filter = 0
+script = ExtResource("1_0bumu")
+
+[node name="SubViewport" type="SubViewport" parent="."]
+transparent_bg = true
+size = Vector2i(64, 27)
+
+[node name="ProgressBar" type="ProgressBar" parent="SubViewport"]
+custom_minimum_size = Vector2(64, 16)
+offset_right = 64.0
+offset_bottom = 27.0
+max_value = 1.0

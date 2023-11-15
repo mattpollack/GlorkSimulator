@@ -8,18 +8,18 @@ class_name TentacleTargetIK
 @export var speed_move : float = 6
 @export var neighbour : TentacleTargetIK
 
-var stepping : bool = false
+var stepping := false
+var should_step := true
 
 func _ready():
 	step()
 
 func _process(delta):
-	if abs(global_position.distance_to(target_step.global_position)) > step_distance and (neighbour == null or neighbour.stepping == false):
+	if abs(global_position.distance_to(target_step.global_position)) > step_distance and (neighbour == null or neighbour.stepping == false) and should_step:
 		step()
 
 func step():
 	stepping = true
-	
 	var target_pos = target_step.global_position
 	var half_way = (global_position + target_step.global_position)/2
 	var t = get_tree().create_tween()

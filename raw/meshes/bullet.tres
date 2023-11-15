@@ -1,0 +1,9 @@
+[gd_resource type="CylinderMesh" load_steps=2 format=3 uid="uid://bytwskkxqv6so"]
+
+[ext_resource type="Material" uid="uid://bdlqaixyy1qmm" path="res://materials/bullet.tres" id="1_01ad3"]
+
+[resource]
+material = ExtResource("1_01ad3")
+top_radius = 0.24
+bottom_radius = 0.24
+height = 1.0

@@ -26,6 +26,8 @@ Give it a roof
 
 """
 
+@export var planet : MeshInstance3D
+
 var mesh_map := {
 	"road": preload("res://raw/meshes/buildings/road.res"),
 	"building-0": preload("res://raw/meshes/buildings/building-3.res"),
@@ -50,7 +52,7 @@ func _ready():
 	
 	_build_2()
 
-class Building:
+class BuildingTemplate:
 	var t : Transform3D
 	var kind : String
 	var neighbour_weight : float
@@ -61,7 +63,7 @@ class Building:
 
 func _build_2():
 	var seed = 2
-	var radius = 6000
+	var radius = 5980
 	var rg := RandomNumberGenerator.new()
 	rg.seed = seed
 	
@@ -90,7 +92,7 @@ func _build_2():
 	var num_objects = 20000
 	var offset = 2.0 / num_objects
 	var increment = PI * (3.0 - sqrt(5.0))
-	var buildings : Array[Building] = []
+	var buildings : Array[BuildingTemplate] = []
 	var neighbour_weight_min : float = INF
 	var neighbour_weight_max : float = 0
 	
@@ -121,7 +123,7 @@ func _build_2():
 		if !skip:
 			neighbour_weight_min = min(neighbour_weight_min, neighbour_weight)
 			neighbour_weight_max = max(neighbour_weight_max, neighbour_weight)
-			buildings.append(Building.new(t, neighbour_weight))
+			buildings.append(BuildingTemplate.new(t, neighbour_weight))
 	
 	# Pre calculate instance counts for multi meshing
 	var instance_counts := {}
@@ -138,32 +140,30 @@ func _build_2():
 
 	# Set the instance counts and counters
 	var instance_is := {}
-	var total = 0
 	
 	for k in instance_counts.keys():
 		instance_is[k] = 0
 		var mm = multi_mesh_map[k] as MultiMeshInstance3D
 		mm.multimesh.instance_count = instance_counts[k]
-		total += instance_counts[k]
 	
-	#var rmm = multi_mesh_map["road"] as MultiMeshInstance3D
-	#rmm.multimesh.instance_count = total
-
 	# Instance the pre calculated buildings
 	for b in buildings:
 		var mm = multi_mesh_map[b.kind] as MultiMeshInstance3D
 		var shape = mm.multimesh.mesh.create_trimesh_shape()
-		
+
 		mm.multimesh.set_instance_transform(instance_is[b.kind], b.t)
-		#rmm.multimesh.set_instance_transform(instance_is[b.kind], b.t)
 
 		var collision_shape := CollisionShape3D.new()
 		collision_shape.shape = shape
 
-		var static_body := StaticBody3D.new()
+		var static_body := Building.new()
 		static_body.transform = b.t
 		static_body.add_child(collision_shape)
+		static_body.add_to_group("enemy")
+		static_body.mm = mm
+		static_body.i = instance_is[b.kind]
 
 		add_child(static_body)
 		
 		instance_is[b.kind] += 1
+
