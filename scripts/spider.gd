@@ -28,7 +28,7 @@ var nearby_enemies : Dictionary = {}
 var mass : float = 8.0
 var gravity_velocity = 0
 var speed_upgrade : float = 1.0
-var durability_upgrade : float = 1.0
+var durability_upgrade : float = 1
 
 func _ready():
 	_set_tentacle_count(4)
@@ -235,8 +235,8 @@ func width() -> float:
 
 # TODO hit amounts
 func hit():
-	var dmg = 0.025 * durability_upgrade
-	mass = clamp(mass - dmg, 8, 20000)
+	var dmg = 0.5 * durability_upgrade
+	mass = clamp(mass - dmg, 2, 20000)
 
 func killed(n : Node3D):
 	if n.get("mass") != null:

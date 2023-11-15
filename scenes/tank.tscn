@@ -1,6 +1,5 @@
-[gd_scene load_steps=19 format=3 uid="uid://lkhf6v8nu6on"]
+[gd_scene load_steps=18 format=3 uid="uid://lkhf6v8nu6on"]
 
-[ext_resource type="PackedScene" uid="uid://dr6hcaekixsic" path="res://scenes/hp_bar.tscn" id="2_a6d0m"]
 [ext_resource type="Script" path="res://scripts/tank.gd" id="2_l5q2k"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v6443"]
@@ -303,6 +302,3 @@ shape = SubResource("BoxShape3D_jja8s")
 [node name="attack_collision" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.79814, -0.182171)
 shape = SubResource("BoxShape3D_jja8s")
-
-[node name="hp_bar" parent="." instance=ExtResource("2_a6d0m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.89197, 0)

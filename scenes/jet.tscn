@@ -1,0 +1,23 @@
+[gd_scene load_steps=5 format=3 uid="uid://b5n2trmxf7ixt"]
+
+[ext_resource type="PackedScene" uid="uid://cxfxknbrk6rs8" path="res://raw/jet.blend" id="1_few1c"]
+[ext_resource type="Script" path="res://scripts/jet.gd" id="2_e0qge"]
+[ext_resource type="Script" path="res://scripts/jet_target.gd" id="3_yetgf"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_01x4t"]
+radius = 10.815
+height = 34.535
+
+[node name="jet" type="Node3D"]
+script = ExtResource("2_e0qge")
+
+[node name="jet_meshes" parent="." instance=ExtResource("1_few1c")]
+
+[node name="Area3D" type="Area3D" parent="jet_meshes" groups=["enemy"]]
+script = ExtResource("3_yetgf")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="jet_meshes/Area3D"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 13.0833, 0, 0)
+shape = SubResource("CapsuleShape3D_01x4t")
+
+[editable path="jet_meshes"]

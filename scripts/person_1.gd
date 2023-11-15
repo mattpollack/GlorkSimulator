@@ -7,7 +7,6 @@ class_name Person
 @onready var animation_tree : AnimationTree = $AnimationTree
 @onready var collision_shape_3d = $CollisionShape3D
 @onready var area_3d = $Area3D
-@onready var hp_bar = $hp_bar
 
 @onready
 var hair_styles : Array[BoneAttachment3D] = [
@@ -47,8 +46,6 @@ func run():
 	animation_tree.set("parameters/conditions/run", true)
 
 func _process(delta):
-	hp_bar.set_hp(float(hp)/float(hp_max))
-
 	if dead:
 		return
 
@@ -57,7 +54,7 @@ func _process(delta):
 
 	# TODO: This is fine but causes the piling issue ?
 	look_at(target, Vector3.UP)
-	translate_object_local(Vector3.BACK * delta * 5)
+	translate_object_local(Vector3.BACK * delta * 8)
 	
 	var gravity = (Vector3(0, -6000, 0) - global_position).normalized() * 9.81 * delta
 	

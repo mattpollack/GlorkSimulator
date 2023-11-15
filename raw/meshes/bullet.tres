@@ -4,6 +4,6 @@
 
 [resource]
 material = ExtResource("1_01ad3")
-top_radius = 0.24
-bottom_radius = 0.24
-height = 1.0
+top_radius = 0.48
+bottom_radius = 0.48
+height = 3.0

@@ -13,7 +13,6 @@ class_name Tank
 @onready var bullet_start = $gun/bullet_start
 @onready var main_collision = $main_collision
 @onready var attack_collision = $Area3D/attack_collision
-@onready var hp_bar = $hp_bar
 
 var fire_rate = 0.25
 var fire_d = 0
@@ -28,8 +27,6 @@ func _shoot():
 	bullet_manager.fire(bullet_start.global_transform)
 
 func _process(delta):
-	hp_bar.set_hp(float(hp)/float(hp_max))
-	
 	if dead:
 		return
 
