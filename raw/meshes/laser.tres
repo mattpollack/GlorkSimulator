@@ -1,0 +1,9 @@
+[gd_resource type="CylinderMesh" load_steps=2 format=3 uid="uid://dnlcsmdxduo7e"]
+
+[ext_resource type="Material" uid="uid://dfwjx63jg2lit" path="res://materials/laser.tres" id="1_jogkm"]
+
+[resource]
+material = ExtResource("1_jogkm")
+top_radius = 2.0
+bottom_radius = 2.0
+height = 80.0

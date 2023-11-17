@@ -29,6 +29,7 @@ var mass : float = 8.0
 var gravity_velocity = 0
 var speed_upgrade : float = 1.0
 var durability_upgrade : float = 1
+var durability_upgrade_count : float = 0
 
 func _ready():
 	_set_tentacle_count(4)
@@ -52,9 +53,12 @@ func upgrade_tentacles(price) -> bool:
 	return false
 
 func upgrade_durability(price) -> bool:
+	
+	durability_upgrade_count += 1
+
 	if mass > price:
 		mass -= price
-		durability_upgrade *= 0.8
+		durability_upgrade = pow(durability_upgrade_count, -1)
 		
 		return true
 	
