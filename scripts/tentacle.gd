@@ -47,7 +47,7 @@ func _process(delta):
 			"out":
 				if target_ik.global_position.distance_to(attack_target.global_position) < delta * attack_speed or tentacle_end.global_position.distance_to(target_ik.global_position) > delta * attack_speed:
 					attack_state = "in"
-					attack_target.hit(self)
+					attack_target.hit(self, player.damage)
 				else:
 					target_ik.global_position -= (target_ik.global_position - attack_target.global_position).normalized() * delta * attack_speed
 			"in":

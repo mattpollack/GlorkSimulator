@@ -48,7 +48,7 @@ var unit_dict = {
 	"jet" = MilitaryUnit.new(
 		preload("res://scenes/jet.tscn"),
 		func(threat : float, last_spawn : float) -> bool:
-			return threat >= 100 and last_spawn >=  clamp(5 - threat * 500/15000 + 1, 5, 30)
+			return threat >= 100 and last_spawn >=  clamp(5 - threat * 500/15000 + 1, 5, 20)
 			,
 		SpawnKind.AIR,
 		200,
@@ -57,6 +57,14 @@ var unit_dict = {
 		preload("res://scenes/satellite.tscn"),
 		func(threat : float, last_spawn : float) -> bool:
 			return threat >= 1000 and last_spawn >= clamp(15 - threat * 150/15000 + 1, 5, 30)
+			,
+		SpawnKind.AIR,
+		200,
+	),
+	"bomb" = MilitaryUnit.new(
+		preload("res://scenes/bomb.tscn"),
+		func(threat : float, last_spawn : float) -> bool:
+			return threat >= 2000 and (last_spawn >= 10 or (threat >= 6000 and last_spawn >= 2))
 			,
 		SpawnKind.AIR,
 		200,

@@ -4,10 +4,11 @@ extends Area3D
 
 var mass = 20
 
-func hit(node : Node3D):
-	jet.hp -= jet.player.damage
+func hit(node : Node3D, dmg_base : float = 1.0):
+	jet.hp -= dmg_base
 	
 	if jet.hp <= 0:
-		jet.reparent(node.caught_objects)
+		if node != null and node.get("caught_objects") != null:
+			jet.reparent(node.caught_objects)
 		jet.dead = true
 		queue_free()

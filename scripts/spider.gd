@@ -28,7 +28,7 @@ var nearby_enemies : Dictionary = {}
 var mass : float = 8.0
 var gravity_velocity = 0
 var speed_upgrade : float = 1.0
-var durability_upgrade : float = 0.1
+var durability_upgrade : float = 0.5
 var durability_upgrade_count : float = 0
 var damage : float = 1
 
@@ -171,7 +171,7 @@ func _process(delta):
 
 	for t in tentacles_arm:
 		t.scale = lerp(t.scale, target_scale, delta)
-		t.attack_speed = (speed_move / 4 + mass/5) * speed_upgrade
+		t.attack_speed = (speed_move / 4 + mass/5) * speed_upgrade + 1
 		t.target_ik.speed_move = mass * mass / 10
 		t.target_ik.step_distance = sqrt(mass) + mass / 2
 		t.tentacle_tip_shape.scale = Vector3.ONE * (1 + mass/8.0)
@@ -246,9 +246,8 @@ func _handle_movement(delta):
 func width() -> float:
 	return aim_at_me.global_position.distance_to(width_anchor.global_position) * 2
 
-# TODO hit amounts
-func hit():
-	var dmg = 0.5 * durability_upgrade
+func hit(node : Node3D, dmg_base : float = 0.5):
+	var dmg = dmg_base * durability_upgrade
 	mass = clamp(mass - dmg, 2, 20000)
 
 func killed(n : Node3D):

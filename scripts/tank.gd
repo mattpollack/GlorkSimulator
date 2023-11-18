@@ -57,12 +57,13 @@ func _process(delta):
 	
 	move_and_slide()
 
-func hit(node : Node3D):
-	hp -= player.damage
+func hit(node : Node3D, dmg_base : float = 1.0):
+	hp -= dmg_base
 	
-	if hp <= 0:
+	if hp <= 0 and !dead:
 		main_collision.queue_free()
 		attack_collision.queue_free()
-		reparent(node.caught_objects)
+		if node != null and node.get("caught_objects") != null:
+			reparent(node.caught_objects)
 		dead = true
 

@@ -1,0 +1,48 @@
+[gd_scene load_steps=8 format=3 uid="uid://dago48osp3ys8"]
+
+[ext_resource type="Script" path="res://scripts/bomb.gd" id="1_tusei"]
+[ext_resource type="Texture2D" uid="uid://d3qkl2k2s8wcf" path="res://raw/bomb-target.png" id="2_6bfm7"]
+[ext_resource type="Texture2D" uid="uid://dy1gqrvt86bmj" path="res://raw/bomb-target-emission.png" id="3_3qw60"]
+[ext_resource type="Texture2D" uid="uid://b4e7i031ma1np" path="res://raw/bomb-aftermatch-decal.png" id="3_4mgyf"]
+[ext_resource type="PackedScene" uid="uid://rdwsj1ve8ftg" path="res://scenes/explosion.tscn" id="3_qnwry"]
+[ext_resource type="PackedScene" uid="uid://b1htbahr2x47x" path="res://raw/bomb.blend" id="4_viton"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ol371"]
+radius = 400.0
+height = 5000.0
+
+[node name="bomb" type="Node3D"]
+script = ExtResource("1_tusei")
+
+[node name="decal" type="Decal" parent="."]
+size = Vector3(600, 600, 600)
+texture_albedo = ExtResource("2_6bfm7")
+texture_emission = ExtResource("3_3qw60")
+emission_energy = 10.0
+
+[node name="aftermath" type="Decal" parent="."]
+size = Vector3(600, 600, 600)
+texture_albedo = ExtResource("3_4mgyf")
+emission_energy = 10.0
+
+[node name="explosion" parent="." instance=ExtResource("3_qnwry")]
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
+[node name="bomb_align" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+
+[node name="bomb" parent="bomb_align" instance=ExtResource("4_viton")]
+transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2062.35, 0)
+shape = SubResource("CapsuleShape3D_ol371")
+
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
+[connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]
+[connection signal="body_entered" from="Area3D" to="." method="_on_area_3d_body_entered"]
+[connection signal="body_exited" from="Area3D" to="." method="_on_area_3d_body_exited"]

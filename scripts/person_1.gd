@@ -60,10 +60,11 @@ func _process(delta):
 	
 	var gravity = (Vector3(0, -6000, 0) - global_position).normalized() * 9.81 * delta
 
-func hit(node : Node3D):
-	hp -= player.damage
+func hit(node : Node3D, dmg_base : float = 1.0):
+	hp -= dmg_base
 	
 	if hp <= 0:
 		collision_shape_3d.queue_free()
-		reparent(node.caught_objects)
+		if node != null and node.get("caught_objects") != null:
+			reparent(node.caught_objects)
 		dead = true

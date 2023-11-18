@@ -65,7 +65,7 @@ func _process_mm(delta : float, mm : MultiMeshInstance3D, i_str, t_str, speed):
 			i = i % total
 			t = max(t - 1, 0)
 			mm.multimesh.set_instance_transform(s, Transform3D(Basis.IDENTITY, Vector3(0, -60000, 0)))
-			player.hit()
+			player.hit(null)
 		else:
 			mm.multimesh.set_instance_transform(s, moved)
 	

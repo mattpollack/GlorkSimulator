@@ -22,9 +22,11 @@ func _process(delta):
 	#hp_bar.set_hp(float(hp)/float(max_hp))
 	pass
 
-func hit(node):
-	hp -= player.damage
+func hit(node, dmg_base : float = 1.0):
+	hp -= dmg_base
 	
 	if hp <= 0:
 		mm.multimesh.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3(0, -6000, 0)))
-		reparent(node.caught_objects)
+		
+		if node != null and node.get("caught_objects") != null:
+			reparent(node.caught_objects)
