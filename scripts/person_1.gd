@@ -1,23 +1,23 @@
-extends CharacterBody3D
+extends Node3D
 
 class_name Person
 
 @export var player : Spider
+@export var bullet_manager : BulletManager
+@onready var collision_shape_3d = $CollisionShape3D
 
 @onready var animation_tree : AnimationTree = $AnimationTree
-@onready var collision_shape_3d = $CollisionShape3D
-@onready var area_3d = $Area3D
 
 @onready
 var hair_styles : Array[BoneAttachment3D] = [
-	$"char_grp/rig/Skeleton3D/hair-1",
-	$"char_grp/rig/Skeleton3D/hair-2",
-	$"char_grp/rig/Skeleton3D/hair-3",
-	$"char_grp/rig/Skeleton3D/hair-4",
-	$"char_grp/rig/Skeleton3D/hair-5",
-	$"char_grp/rig/Skeleton3D/hair-6",
-	$"char_grp/rig/Skeleton3D/hair-7",
-	$"char_grp/rig/Skeleton3D/hair-8"
+	$"person-1/char_grp/rig/Skeleton3D/hair-1",
+	$"person-1/char_grp/rig/Skeleton3D/hair-2",
+	$"person-1/char_grp/rig/Skeleton3D/hair-3",
+	$"person-1/char_grp/rig/Skeleton3D/hair-4",
+	$"person-1/char_grp/rig/Skeleton3D/hair-5",
+	$"person-1/char_grp/rig/Skeleton3D/hair-6",
+	$"person-1/char_grp/rig/Skeleton3D/hair-7",
+	$"person-1/char_grp/rig/Skeleton3D/hair-8"
 ]
 
 var mass = 1
@@ -30,7 +30,7 @@ func _ready():
 	
 	for h in hair_styles:
 		h.hide()
-	
+
 	hair_styles[randi_range(0, hair_styles.size() - 1)].show()
 	
 	scale = Vector3(1, 1, 1) * randf_range(0.8, 1.5)
@@ -48,28 +48,22 @@ func run():
 func _process(delta):
 	if dead:
 		return
-
-	var target = player.global_position
-	target *= 6000 / target.distance_to(Vector3(0, -6000, 0))
+	
+	if global_position.distance_to(player.global_position) > 100:
+		queue_free()
+		dead = true
 
 	# TODO: This is fine but causes the piling issue ?
-	look_at(target, Vector3.UP)
+	look_at(player.global_position, Vector3.UP)
 	translate_object_local(Vector3.BACK * delta * 8)
+	global_position = global_position.move_toward(Vector3(0, -6000, 0), global_position.distance_to(Vector3(0, -6000, 0)) - 5984)
 	
 	var gravity = (Vector3(0, -6000, 0) - global_position).normalized() * 9.81 * delta
-	
-	if !is_on_floor():
-		velocity += gravity
-	
-	# apply_floor_snap() ???
-	
-	move_and_slide()
 
 func hit(node : Node3D):
-	hp -= 1
+	hp -= player.damage
 	
-	if hp == 0:
+	if hp <= 0:
 		collision_shape_3d.queue_free()
-		area_3d.queue_free()
 		reparent(node.caught_objects)
 		dead = true

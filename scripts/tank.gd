@@ -18,7 +18,7 @@ var fire_rate = 0.25
 var fire_d = 0
 var dead := false
 var mass = 5
-var hp_max := 2
+var hp_max := 10
 var hp := hp_max
 
 func _shoot():
@@ -58,9 +58,9 @@ func _process(delta):
 	move_and_slide()
 
 func hit(node : Node3D):
-	hp -= 1
+	hp -= player.damage
 	
-	if hp == 0:
+	if hp <= 0:
 		main_collision.queue_free()
 		attack_collision.queue_free()
 		reparent(node.caught_objects)

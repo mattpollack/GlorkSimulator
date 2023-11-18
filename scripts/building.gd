@@ -2,9 +2,11 @@ extends StaticBody3D
 
 class_name Building
 
+var player : Spider
+
 var mm : MultiMeshInstance3D
 var i : int
-var max_hp := 4
+var max_hp := 40
 var hp := max_hp
 var hp_bar_scene : PackedScene = preload("res://scenes/hp_bar.tscn")
 var hp_bar : HpBar
@@ -21,8 +23,8 @@ func _process(delta):
 	pass
 
 func hit(node):
-	hp -= 1
+	hp -= player.damage
 	
-	if hp == 0:
+	if hp <= 0:
 		mm.multimesh.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3(0, -6000, 0)))
 		reparent(node.caught_objects)

@@ -4,7 +4,7 @@ extends Control
 
 @onready var bg : ColorRect = $_/health_parent/health_container/bg
 @onready var value : ColorRect = $_/health_parent/health_container/value
-@onready var threat = $_/threat
+@onready var fps = $_/fps
 
 var max_mass = 0
 var max_threat = 0
@@ -14,4 +14,4 @@ func _process(delta):
 	max_threat = max(max_threat, player.mass / 15000)
 
 	value.custom_minimum_size.x = clamp(player.mass / 15000, 0, 1) * bg.size.x
-	threat.text = "%f" % max_threat
+	fps.text = "%f" % (1.0 / delta)

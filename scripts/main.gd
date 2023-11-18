@@ -7,6 +7,7 @@ var show_upgrades := false
 var upgrade_tentacle_count := 1
 var upgrade_speed_count := 1
 var upgrade_durability_count := 1
+var upgrade_damage_count := 1
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -29,8 +30,8 @@ func _process(delta):
 	$UI/_/health_parent/health_container/mass_text.text = "$ %d / $ %d" % [player.mass, 15000]
 
 func _on_upgrade_tentacles_gui_input(e : InputEvent):
-	var price = 10 * pow(upgrade_tentacle_count, 3)
-	var price_new = 10 * pow(upgrade_tentacle_count + 1, 3)
+	var price = 10 * pow(upgrade_tentacle_count, 2)
+	var price_new = 10 * pow(upgrade_tentacle_count + 1, 2)
 	
 	if e.is_action_pressed("click"):
 		if player.upgrade_tentacles(price):
@@ -39,8 +40,8 @@ func _on_upgrade_tentacles_gui_input(e : InputEvent):
 			$UI/upgrade_hud/_/_/_/upgrade_tentacles/price.text = "$ %d" % price_new
 
 func _on_upgrade_speed_gui_input(e : InputEvent):
-	var price = 10 * pow(upgrade_speed_count, 3)
-	var price_new = 10 * pow(upgrade_speed_count + 1, 3)
+	var price = 10 * pow(upgrade_speed_count, 2)
+	var price_new = 10 * pow(upgrade_speed_count + 1, 2)
 	
 	if e.is_action_pressed("click"):
 		if player.upgrade_speed(price):
@@ -49,11 +50,21 @@ func _on_upgrade_speed_gui_input(e : InputEvent):
 			$UI/upgrade_hud/_/_/_/upgrade_speed/price.text = "$ %d" % price_new
 
 func _on_upgrade_durability_gui_input(e : InputEvent):
-	var price = 10 * pow(upgrade_durability_count, 3)
-	var price_new = 10 * pow(upgrade_durability_count + 1, 3)
+	var price = 10 * pow(upgrade_durability_count, 2)
+	var price_new = 10 * pow(upgrade_durability_count + 1, 2)
 	
 	if e.is_action_pressed("click"):
 		if player.upgrade_durability(price):
 			upgrade_durability_count += 1
 			$UI/upgrade_hud/_/_/_/upgrade_durability/bg/quantity.text = "%d" % upgrade_durability_count
 			$UI/upgrade_hud/_/_/_/upgrade_durability/price.text = "$ %d" % price_new
+
+func _on_upgrade_damage_gui_input(e : InputEvent):
+	var price = 10 * pow(upgrade_damage_count, 2)
+	var price_new = 10 * pow(upgrade_damage_count + 1, 2)
+	
+	if e.is_action_pressed("click"):
+		if player.upgrade_damage(price):
+			upgrade_damage_count += 1
+			$UI/upgrade_hud/_/_/_/upgrade_damage/bg/quantity.text = "%d" % upgrade_damage_count
+			$UI/upgrade_hud/_/_/_/upgrade_damage/price.text = "$ %d" % price_new

@@ -2,31 +2,7 @@ extends Node3D
 
 class_name BuildingGenerator
 
-"""
-
-Requirements:
-	Building variations
-	Floor rooms and variations
-	Nav
-	Positioning of people
-"""
-
-"""
-
-TODO:
-	multi mesh room manager
-	multi mesh people manager with movement?
-	multi mesh window manager with shattering (somehow have a static number of particle systems?)
-	
-
-Generate a floor shape by procedurally placing rooms
-Procedurally choose some number of floors
-Give it a roof 
-
-
-"""
-
-@export var planet : MeshInstance3D
+@export var player : Spider
 
 var mesh_map := {
 	"road": preload("res://raw/meshes/buildings/road.res"),
@@ -50,7 +26,7 @@ func _ready():
 		multi_mesh_map[k] = multi_mesh
 		add_child(multi_mesh)
 	
-	_build_2()
+	_build()
 
 class BuildingTemplate:
 	var t : Transform3D
@@ -61,7 +37,7 @@ class BuildingTemplate:
 		self.t = t
 		self.neighbour_weight = neighbour_weight
 
-func _build_2():
+func _build():
 	var seed = 2
 	var radius = 5980
 	var rg := RandomNumberGenerator.new()
@@ -162,6 +138,7 @@ func _build_2():
 		static_body.add_to_group("enemy")
 		static_body.mm = mm
 		static_body.i = instance_is[b.kind]
+		static_body.player = player
 
 		add_child(static_body)
 		

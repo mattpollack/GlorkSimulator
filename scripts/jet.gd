@@ -23,7 +23,7 @@ func _process(delta):
 	if dead:
 		return
 	
-	rotate_object_local(Vector3.BACK, delta / 5)
+	rotate_object_local(Vector3.BACK, delta / 8)
 	
 	if jet_meshes.global_position.distance_to(player.global_position) < 1000:
 		bullet_manager.fire((jet_meshes.global_transform as Transform3D).looking_at(player.aim_at_me.global_position))

@@ -28,6 +28,10 @@ func _ready():
 	mm_laser.multimesh.mesh = laser_mesh
 	mm_laser.multimesh.instance_count = total
 	
+	for i in range(total):
+		mm_bullet.multimesh.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3(0, -60000, 0)))
+		mm_laser.multimesh.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3(0, -60000, 0)))
+	
 	add_child(mm_bullet)
 	add_child(mm_laser)
 
@@ -44,19 +48,23 @@ func _process_mm(delta : float, mm : MultiMeshInstance3D, i_str, t_str, speed):
 	var t : int = get(t_str)
 	
 	for s in range(total):
+		# Dumb way of skipping bad bullets
+		if mm.multimesh.get_instance_transform(s).origin.distance_to(Vector3(0, -6000, 0)) > 10000:
+			continue
+
 		var moved := mm.multimesh.get_instance_transform(s).translated_local(Vector3.DOWN * delta * speed)
 		
 		# Clean up bullets which are far from view
-		if moved.origin.distance_to(Vector3(0, -6000, 0)) > 7500 or moved.origin.distance_to(Vector3(0, -6000, 0)) < 5500:
+		if moved.origin.distance_to(Vector3(0, -6000, 0)) > 10000 or moved.origin.distance_to(Vector3(0, -6000, 0)) < 5985:
 			i += 1
 			i = i % total
 			t = max(t - 1, 0)
-			mm.multimesh.set_instance_transform(s, Transform3D(Basis.IDENTITY, Vector3(0, -6000, 0)))
+			mm.multimesh.set_instance_transform(s, Transform3D(Basis.IDENTITY, Vector3(0, -60000, 0)))
 		elif moved.origin.distance_to(player.aim_at_me.global_position) < player.width():
 			i += 1
 			i = i % total
 			t = max(t - 1, 0)
-			mm.multimesh.set_instance_transform(s, Transform3D(Basis.IDENTITY, Vector3(0, -6000, 0)))
+			mm.multimesh.set_instance_transform(s, Transform3D(Basis.IDENTITY, Vector3(0, -60000, 0)))
 			player.hit()
 		else:
 			mm.multimesh.set_instance_transform(s, moved)

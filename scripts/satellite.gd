@@ -25,5 +25,5 @@ func _process(delta):
 	
 	rotate_object_local(Vector3.BACK, delta / 20)
 	
-	if satellite_meshes.global_position.distance_to(player.global_position) < 4000 + player.width():
+	if satellite_meshes.global_position.distance_to(player.global_position) < 6000 + player.width():
 		bullet_manager.fire_laser((satellite_meshes.global_transform as Transform3D).looking_at(player.aim_at_me.global_position))

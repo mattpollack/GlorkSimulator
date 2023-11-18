@@ -18,7 +18,7 @@ signal killed_signal
 
 var tentacle_scene : PackedScene = preload("res://scenes/tentacle.tscn")
 
-var speed_move : float = 30.0
+var speed_move : float = 35.0
 var speed_turn : float = 2.0
 var mouse_sensitivity : float = 0.2
 var ground_offset : float = 2
@@ -28,12 +28,21 @@ var nearby_enemies : Dictionary = {}
 var mass : float = 8.0
 var gravity_velocity = 0
 var speed_upgrade : float = 1.0
-var durability_upgrade : float = 1
+var durability_upgrade : float = 0.1
 var durability_upgrade_count : float = 0
+var damage : float = 1
 
 func _ready():
 	_set_tentacle_count(4)
 
+func upgrade_damage(price) -> bool:
+	if mass > price:
+		mass -= price
+		damage += 1
+		
+		return true
+	
+	return false
 func upgrade_speed(price) -> bool:
 	if mass > price:
 		mass -= price
@@ -192,7 +201,7 @@ func _process(delta):
 			global_position += (global_position - Vector3(0, -6000, 0)).normalized()
 	
 	camera_arm.global_position = global_position
-	
+
 	var i := 0
 	
 	for t in tentacles_arm:
@@ -218,7 +227,7 @@ func _process(delta):
 			tn.should_attack = true
 
 func _input(event : InputEvent):
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_object_local(Vector3.UP, deg_to_rad(-event.relative.x * mouse_sensitivity))
 		camera_arm.rotate_object_local(Vector3.LEFT, deg_to_rad(event.relative.y * mouse_sensitivity))
 		camera_arm.rotation.x = clampf(camera_arm.rotation.x, -PI/4 + 0.01, PI/4 - 0.01)

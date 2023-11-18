@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://1g60pg34hf6v"]
+
+[ext_resource type="Script" path="res://scripts/mothership.gd" id="1_3ajcd"]
+[ext_resource type="PackedScene" uid="uid://bdye8qremp8t2" path="res://raw/mothership.blend" id="2_2mjn2"]
+
+[node name="mothership" type="Node3D"]
+script = ExtResource("1_3ajcd")
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 22.3782)
+light_color = Color(0.74902, 0.4, 0, 1)
+light_energy = 100.0
+omni_range = 128.192
+
+[node name="mothership" parent="." instance=ExtResource("2_2mjn2")]
+transform = Transform3D(-600, 0, -5.24537e-05, 0, 600, 0, 5.24537e-05, 0, -600, 0, 0, 0)
+
+[node name="lasers" type="Node3D" parent="mothership"]
+
+[node name="Node3D" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.230206, 1.13375)
+
+[node name="Node3D2" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0886732, 0.216386, 1.13375)
+
+[node name="Node3D3" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.171588, 0.161109, 1.13375)
+
+[node name="Node3D4" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.215349, 0.087407, 1.13375)
+
+[node name="Node3D5" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.229168, 0.0056434, 1.13375)
+
+[node name="Node3D6" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.218804, -0.0898401, 1.13375)
+
+[node name="Node3D7" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.170436, -0.165846, 1.13375)
+
+[node name="Node3D8" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.088673, -0.215365, 1.13375)
+
+[node name="Node3D9" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00115118, -0.229184, 1.13375)
+
+[node name="Node3D10" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0886736, -0.217668, 1.13375)
+
+[node name="Node3D11" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.160073, -0.164694, 1.13375)
+
+[node name="Node3D12" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.216501, -0.0921433, 1.13375)
+
+[node name="Node3D13" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.232624, -0.00347009, 1.13375)
+
+[node name="Node3D14" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.21535, 0.0932643, 1.13375)
+
+[node name="Node3D15" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.162376, 0.175028, 1.13375)
+
+[node name="Node3D16" type="Node3D" parent="mothership/lasers"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0875222, 0.21994, 1.13375)
