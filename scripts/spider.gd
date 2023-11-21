@@ -26,6 +26,7 @@ var tentacles_leg : Array[Tentacle] = []
 var tentacles_arm : Array[Tentacle] = []
 var nearby_enemies : Dictionary = {}
 var mass : float = 8.0
+var mass_max : float = mass
 var gravity_velocity = 0
 var speed_upgrade : float = 1.0
 var durability_upgrade : float = 0.5
@@ -153,31 +154,36 @@ func _set_ground_ray_targets(offset : float) -> void:
 		ray.target_position.y = -offset - 12
 
 func _process(delta):
-	var target_scale = Vector3(1.0, 1.0, 1.0) * mass / 10
-	ground_offset = lerp(ground_offset, mass/8, delta)
-	speed_move = mass + sqrt(mass) * 10 * speed_upgrade
+	if Utils.paused:
+		return
+
+	mass_max = max(mass_max, mass)
+	var target_mass : float = maxf(maxf(mass, mass_max/4), 8.0) # don't let the player get to 1/4 of their highest mass achievement
+	var target_scale = Vector3(1.0, 1.0, 1.0) * target_mass / 10
+	ground_offset = lerp(ground_offset, target_mass/8, delta)
+	speed_move = target_mass + sqrt(target_mass) * 10 * speed_upgrade - 5
 	
 	body.scale = lerp(body.scale, target_scale/1.6, delta)
 	
-	camera.position.z = lerp(camera.position.z, mass - 15, delta)
-	camera.near = lerp(camera.near, mass / 1000, delta)
-	camera.far = lerp(camera.far, float(clamp(mass * 10, 4000, 64000)), delta)
+	camera.position.z = lerp(camera.position.z, target_mass - 15, delta)
+	camera.near = lerp(camera.near, target_mass / 1000, delta)
+	camera.far = lerp(camera.far, float(clamp(target_mass * 10, 4000, 64000)), delta)
 	
 	for t in tentacles_leg:
 		t.scale = lerp(t.scale, target_scale, delta)
-		t.target_ik.speed_move = (mass * mass / 10) * speed_upgrade
-		t.target_ik.step_distance = sqrt(mass) + mass / 2
-		t.tentacle_tip_shape.scale = Vector3.ONE * (1 + mass/8.0)
+		t.target_ik.speed_move = (target_mass * target_mass / 10) * speed_upgrade
+		t.target_ik.step_distance = sqrt(target_mass) + target_mass / 2
+		t.tentacle_tip_shape.scale = Vector3.ONE * (1 + target_mass/8.0)
 
 	for t in tentacles_arm:
 		t.scale = lerp(t.scale, target_scale, delta)
-		t.attack_speed = (speed_move / 4 + mass/5) * speed_upgrade + 1
-		t.target_ik.speed_move = mass * mass / 10
-		t.target_ik.step_distance = sqrt(mass) + mass / 2
-		t.tentacle_tip_shape.scale = Vector3.ONE * (1 + mass/8.0)
+		t.attack_speed = (speed_move / 4 + target_mass/5) * speed_upgrade + 4
+		t.target_ik.speed_move = target_mass * target_mass / 10
+		t.target_ik.step_distance = sqrt(target_mass) + mass / 2
+		t.tentacle_tip_shape.scale = Vector3.ONE * (1 + target_mass/8.0)
 	
 	# Apply movement and rotation transformations
-	_set_ground_ray_targets(mass/4)
+	_set_ground_ray_targets(target_mass/4)
 
 	var point_and_norm = _ground_point_and_norm()
 	var ground_point : Vector3 = point_and_norm[0]
@@ -227,14 +233,13 @@ func _process(delta):
 			tn.should_attack = true
 
 func _input(event : InputEvent):
+	if Utils.paused:
+		return
+
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_object_local(Vector3.UP, deg_to_rad(-event.relative.x * mouse_sensitivity))
 		camera_arm.rotate_object_local(Vector3.LEFT, deg_to_rad(event.relative.y * mouse_sensitivity))
 		camera_arm.rotation.x = clampf(camera_arm.rotation.x, -PI/4 + 0.01, PI/4 - 0.01)
-
-	#if Input.is_action_just_pressed("debug_increase_size"):
-	#	mass += mass
-	#	_set_tentacle_count(tentacles_arm.size()+1)
 
 func _handle_movement(delta):
 	var dir = Input.get_axis("forward", "backward")

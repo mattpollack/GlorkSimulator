@@ -20,6 +20,9 @@ func _ready():
 	jet_meshes.translate(Vector3(0, rad, 0))
 
 func _process(delta):
+	if Utils.paused:
+		return
+
 	if dead:
 		return
 	

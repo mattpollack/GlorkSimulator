@@ -1,0 +1,173 @@
+[gd_scene load_steps=14 format=3 uid="uid://b6wxw7ht4ph5h"]
+
+[ext_resource type="ArrayMesh" uid="uid://coraf2vm3ssi1" path="res://raw/meshes/planet.res" id="1_eamfj"]
+[ext_resource type="Script" path="res://menu.gd" id="1_hj5ag"]
+[ext_resource type="PackedScene" uid="uid://c36velgas3n3k" path="res://addons/zylann.atmosphere/planet_atmosphere.tscn" id="2_flqlr"]
+[ext_resource type="PackedScene" uid="uid://coyhv5qg7c5j2" path="res://raw/player.blend" id="3_66ntj"]
+[ext_resource type="PackedScene" uid="uid://64eleh7ydmn3" path="res://raw/tentacle.blend" id="4_50ef0"]
+[ext_resource type="Texture2D" uid="uid://dj8wxtdoe0tf5" path="res://raw/Logo.png" id="6_0nfap"]
+[ext_resource type="Texture2D" uid="uid://defddk334ax7r" path="res://raw/play.png" id="6_pfg2t"]
+[ext_resource type="Texture2D" uid="uid://nqokn4ku77dv" path="res://raw/sky-1.png" id="7_gbt17"]
+[ext_resource type="Texture2D" uid="uid://di2hxco4uj7a8" path="res://raw/play-down.png" id="7_rb77j"]
+[ext_resource type="Texture2D" uid="uid://fbl0c3k7pumi" path="res://raw/play-hover.png" id="8_rwsp0"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lg7so"]
+panorama = ExtResource("7_gbt17")
+
+[sub_resource type="Sky" id="Sky_mxc6f"]
+sky_material = SubResource("PanoramaSkyMaterial_lg7so")
+
+[sub_resource type="Environment" id="Environment_vie13"]
+background_mode = 2
+sky = SubResource("Sky_mxc6f")
+tonemap_mode = 2
+volumetric_fog_density = 0.0
+
+[node name="menu" type="Node3D"]
+script = ExtResource("1_hj5ag")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.0524445, 0.864835, -0.49931, -6.43915e-10, 0.499998, 0.866027, 0.998624, 0.0454183, -0.0262221, 0, 0, 48.8071)
+shadow_enabled = true
+
+[node name="planet_mesh" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.001, 0, 0, 0, 0.001, 0, 0, 0, 0.001, 0, 0, 0)
+mesh = ExtResource("1_eamfj")
+
+[node name="atmosphere" parent="." instance=ExtResource("2_flqlr")]
+planet_radius = 6.0
+atmosphere_height = 10.0
+sun_path = NodePath("../DirectionalLight3D")
+shader_params/u_density = 0.5
+shader_params/u_atmosphere_modulate = Color(1, 0.980392, 0.964706, 1)
+shader_params/u_atmosphere_ambient_color = Color(0.0196078, 0.0196078, 0.0431373, 1)
+
+[node name="player" parent="." instance=ExtResource("3_66ntj")]
+transform = Transform3D(2.86525, -0.889025, 0, 0.889025, 2.86525, 0, 0, 0, 3, -4.13031, 15.8035, 0)
+
+[node name="tentacle" parent="player" instance=ExtResource("4_50ef0")]
+transform = Transform3D(0.203851, 0.247028, 0.947324, 0.247028, 0.923353, -0.293934, -0.947324, 0.293935, 0.127203, 0.536897, -0.693716, 0.0337313)
+
+[node name="SkeletonIK3D" type="SkeletonIK3D" parent="player/tentacle/Armature/Skeleton3D" index="1"]
+process_priority = 1
+root_bone = &"Bone"
+tip_bone = &"Bone.007"
+target_node = NodePath("../../../target")
+
+[node name="target" type="Node3D" parent="player/tentacle"]
+transform = Transform3D(1, -2.38419e-07, -8.19564e-08, 2.68221e-07, 0.999999, -2.23517e-08, 7.45058e-09, 0, 1, -1.19904, -4.3066, 2.52936)
+
+[node name="tentacle2" parent="player" instance=ExtResource("4_50ef0")]
+transform = Transform3D(0.948768, 0.00408289, 0.315947, 0.115651, 0.926044, -0.359261, -0.294047, 0.377395, 0.878129, 0.0864652, -0.858544, 0.0337313)
+
+[node name="SkeletonIK3D" type="SkeletonIK3D" parent="player/tentacle2/Armature/Skeleton3D" index="1"]
+process_priority = 1
+root_bone = &"Bone"
+tip_bone = &"Bone.007"
+target_node = NodePath("../../../target")
+
+[node name="target" type="Node3D" parent="player/tentacle2"]
+transform = Transform3D(1, -2.38419e-07, -8.19564e-08, 2.68221e-07, 0.999999, -2.23517e-08, 7.45058e-09, 0, 1, -1.19904, -4.3066, 2.52936)
+
+[node name="tentacle3" parent="player" instance=ExtResource("4_50ef0")]
+transform = Transform3D(0.129607, -0.406194, -0.904549, 0.403817, 0.854788, -0.325989, 0.905612, -0.323023, 0.274815, -0.214494, -0.765162, 0.0337313)
+
+[node name="SkeletonIK3D" type="SkeletonIK3D" parent="player/tentacle3/Armature/Skeleton3D" index="1"]
+process_priority = 1
+root_bone = &"Bone"
+tip_bone = &"Bone.007"
+target_node = NodePath("../../../target")
+
+[node name="target" type="Node3D" parent="player/tentacle3"]
+transform = Transform3D(1, -2.38419e-07, -8.19564e-08, 2.68221e-07, 0.999999, -2.23517e-08, 7.45058e-09, 0, 1, -1.19904, -4.3066, 2.52936)
+
+[node name="tentacle4" parent="player" instance=ExtResource("4_50ef0")]
+transform = Transform3D(-0.917964, 0.0952488, -0.385058, 0.347659, 0.660583, -0.665404, 0.190984, -0.744686, -0.639506, -0.417483, -0.702179, -0.914008)
+
+[node name="SkeletonIK3D" type="SkeletonIK3D" parent="player/tentacle4/Armature/Skeleton3D" index="1"]
+process_priority = 1
+root_bone = &"Bone"
+tip_bone = &"Bone.007"
+target_node = NodePath("../../../target")
+
+[node name="target" type="Node3D" parent="player/tentacle4"]
+transform = Transform3D(1, -2.38419e-07, -8.19564e-08, 2.68221e-07, 0.999999, -2.23517e-08, 7.45058e-09, 0, 1, -1.19904, -4.3066, 2.52936)
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -32.0
+offset_right = 64.0
+offset_bottom = 32.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+
+[node name="play" type="TextureButton" parent="Control/VBoxContainer"]
+layout_mode = 2
+mouse_default_cursor_shape = 2
+texture_normal = ExtResource("6_pfg2t")
+texture_pressed = ExtResource("7_rb77j")
+texture_hover = ExtResource("8_rwsp0")
+
+[node name="Control" type="Control" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = -331.0
+offset_right = 128.0
+offset_bottom = -139.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="Control/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -384.0
+offset_top = -178.0
+offset_right = -128.0
+offset_bottom = 14.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(3, 3)
+mouse_filter = 2
+texture = ExtResource("6_0nfap")
+
+[node name="cam_anchor" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="cam_anchor"]
+transform = Transform3D(1, 0, 0, 0, 0.907777, 0.419452, 0, -0.419452, 0.907777, 0, 19.81, 43.016)
+fov = 61.8
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_vie13")
+
+[connection signal="pressed" from="Control/VBoxContainer/play" to="." method="_on_play_pressed"]
+
+[editable path="player/tentacle"]
+[editable path="player/tentacle2"]
+[editable path="player/tentacle3"]
+[editable path="player/tentacle4"]

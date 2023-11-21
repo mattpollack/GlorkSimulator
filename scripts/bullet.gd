@@ -9,6 +9,9 @@ func _ready():
 	start_pos = global_position
 
 func _process(delta):
+	if Utils.paused:
+		return
+
 	translate(Vector3.FORWARD * delta * 500)
 	
 	if start_pos.distance_to(global_position) > 600:

@@ -23,3 +23,39 @@ As the players mass grows, so does the planets military strength. Here are units
 - Jet, orbits the planet, does medium damage, medium range, very fast
 - Laser Satellite, orbits the planet, does high damage, has a high range, medium speed
 - Nuclear bomb, launches from random points on the planet, does enormous damage, has infinite range, slow speed 
+
+### Playtesting notes
+
+```
+I like everything thats happening but I don't know what I'm doing 
+ - TUTORIAL
+
+More building types
+More "city" 
+
+Planet coloring 
+
+Head clipping 
+
+Separate attack/move tentacle
+
+Bullets that collide with buildings
+
+Damage decals on building
+
+Going under buildings, body collision
+
+Achievements 
+ - Can be the tutorial???
+
+Hit indications
+
+"wanted level"
+
+Variety in building texture 
+
+FIX THE LASER | DON'T MAKE IT A PROJECTILE
+
+cranes 
+
+```

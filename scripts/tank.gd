@@ -27,6 +27,9 @@ func _shoot():
 	bullet_manager.fire(bullet_start.global_transform)
 
 func _process(delta):
+	if Utils.paused:
+		return
+	
 	if dead:
 		return
 

@@ -64,7 +64,7 @@ var unit_dict = {
 	"bomb" = MilitaryUnit.new(
 		preload("res://scenes/bomb.tscn"),
 		func(threat : float, last_spawn : float) -> bool:
-			return threat >= 2000 and (last_spawn >= 10 or (threat >= 6000 and last_spawn >= 2))
+			return threat >= 2000 and (last_spawn >= 10 or (threat >= 5000 and last_spawn >= 2))
 			,
 		SpawnKind.AIR,
 		200,
@@ -82,6 +82,9 @@ func _ready():
 		_spawn(unit_dict["person"])
 
 func _process(delta):
+	if Utils.paused:
+		return
+
 	threat = max(threat, player.mass)
 
 	for k in unit_spawn_dict:

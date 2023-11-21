@@ -44,6 +44,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.15981, 2.9922, 0)
 [node name="ground_rays" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.12225, 0)
 
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.3896, 0)
+light_energy = 0.15
+
 [connection signal="area_entered" from="body/player2/reach_area" to="." method="_on_reach_area_area_entered"]
 [connection signal="area_exited" from="body/player2/reach_area" to="." method="_on_reach_area_area_exited"]
 [connection signal="body_entered" from="body/player2/reach_area" to="." method="_on_reach_area_body_entered"]

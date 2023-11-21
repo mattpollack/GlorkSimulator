@@ -15,6 +15,9 @@ func _ready():
 	step()
 
 func _process(delta):
+	if Utils.paused:
+		return
+	
 	if abs(global_position.distance_to(target_step.global_position)) > step_distance and (neighbour == null or neighbour.stepping == false) and should_step:
 		step()
 

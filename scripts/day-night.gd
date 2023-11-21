@@ -4,6 +4,9 @@ var rad = 50000
 var angle : float = 0
 
 func _process(delta):
+	if Utils.paused:
+		return
+
 	angle += delta / 100
 
 	var x = sin(angle) * rad

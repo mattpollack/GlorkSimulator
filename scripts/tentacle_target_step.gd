@@ -6,6 +6,9 @@ class_name TentacleTargetStep
 @onready var target_step_under_cast : RayCast3D = $"../target_step_under_cast"
 
 func _physics_process(delta):
+	if Utils.paused:
+		return
+	
 	var point_top := get_collision_point()
 	var point_under := target_step_under_cast.get_collision_point()
 

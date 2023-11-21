@@ -32,6 +32,9 @@ func _set_target(attack_target : Node3D):
 	self.attack_state = "in"
 
 func _process(delta):
+	if Utils.paused:
+		return
+		
 	target_ik.should_step = should_step
 	attack_place.should_attack = should_attack
 

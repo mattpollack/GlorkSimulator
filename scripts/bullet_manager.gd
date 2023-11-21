@@ -36,6 +36,9 @@ func _ready():
 	add_child(mm_laser)
 
 func _process(delta : float):
+	if Utils.paused:
+		return
+
 	m.lock()
 	
 	_process_mm(delta, mm_bullet, "bullet_i", "bullet_t", 500)

@@ -41,6 +41,9 @@ func explode():
 			n.get("hit").call(self, 40000.0)
 
 func _physics_process(delta):
+	if Utils.paused:
+		return
+	
 	if !exploded:
 		decal.rotate_object_local(Vector3.UP, delta)
 		decal.scale *= 1 - delta/delay

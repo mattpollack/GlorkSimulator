@@ -46,6 +46,9 @@ func run():
 	animation_tree.set("parameters/conditions/run", true)
 
 func _process(delta):
+	if Utils.paused:
+		return
+
 	if dead:
 		return
 	
@@ -63,7 +66,7 @@ func _process(delta):
 func hit(node : Node3D, dmg_base : float = 1.0):
 	hp -= dmg_base
 	
-	if hp <= 0:
+	if hp <= 0 and !dead:
 		collision_shape_3d.queue_free()
 		if node != null and node.get("caught_objects") != null:
 			reparent(node.caught_objects)

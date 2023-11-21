@@ -12,3 +12,5 @@ static func basis_from_normal(normal : Vector3, transform : Transform3D, scale :
 	result.z *= scale.z
 	
 	return result
+
+static var paused := false
