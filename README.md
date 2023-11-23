@@ -24,11 +24,13 @@ As the players mass grows, so does the planets military strength. Here are units
 - Laser Satellite, orbits the planet, does high damage, has a high range, medium speed
 - Nuclear bomb, launches from random points on the planet, does enormous damage, has infinite range, slow speed 
 
-### Playtesting notes
+### TODOs
 
 ```
-I like everything thats happening but I don't know what I'm doing 
- - TUTORIAL
+
+actual death and win screens
+
+hit markers
 
 More building types
 More "city" 

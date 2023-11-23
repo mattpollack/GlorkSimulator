@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dago48osp3ys8"]
+[gd_scene load_steps=9 format=3 uid="uid://dago48osp3ys8"]
 
 [ext_resource type="Script" path="res://scripts/bomb.gd" id="1_tusei"]
 [ext_resource type="Texture2D" uid="uid://d3qkl2k2s8wcf" path="res://raw/bomb-target.png" id="2_6bfm7"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://b4e7i031ma1np" path="res://raw/bomb-aftermatch-decal.png" id="3_4mgyf"]
 [ext_resource type="PackedScene" uid="uid://rdwsj1ve8ftg" path="res://scenes/explosion.tscn" id="3_qnwry"]
 [ext_resource type="PackedScene" uid="uid://b1htbahr2x47x" path="res://raw/bomb.blend" id="4_viton"]
+[ext_resource type="AudioStream" uid="uid://c4btdyoqr2cpl" path="res://raw/441497__matrixxx__retro-explosion-05.wav" id="7_6v3mb"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ol371"]
 radius = 400.0
@@ -41,6 +42,11 @@ transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, 0, 0)
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2062.35, 0)
 shape = SubResource("CapsuleShape3D_ol371")
+
+[node name="explosion_sound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("7_6v3mb")
+unit_size = 4000.0
+pitch_scale = 0.17
 
 [connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
 [connection signal="area_exited" from="Area3D" to="." method="_on_area_3d_area_exited"]

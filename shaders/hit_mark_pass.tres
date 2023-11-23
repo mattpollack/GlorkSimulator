@@ -1,0 +1,139 @@
+[gd_resource type="VisualShader" load_steps=10 format=3 uid="uid://cfnjovl8fp2l4"]
+
+[sub_resource type="VisualShaderNodeVectorOp" id="VisualShaderNodeVectorOp_mmdnd"]
+default_input_values = [0, Quaternion(0, 0, 0, 0), 1, Quaternion(0, 0, 0, 0)]
+op_type = 2
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_nkhoy"]
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_v33s1"]
+size = Vector2(637.207, 400.692)
+expression = "hit_fade = instance_custom_data.x;"
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_fe6r4"]
+parameter_name = "hit_fade"
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_alg50"]
+expanded_output_ports = [0]
+constant = Color(1, 0, 0, 1)
+
+[sub_resource type="VisualShaderNodeGlobalExpression" id="VisualShaderNodeGlobalExpression_7sbo8"]
+size = Vector2(814.347, 246.259)
+expression = "varying vec4 instance_custom_data;"
+
+[sub_resource type="VisualShaderNodeExpression" id="VisualShaderNodeExpression_yg2rf"]
+size = Vector2(814.347, 322.436)
+expression = "instance_custom_data = INSTANCE_CUSTOM;"
+
+[sub_resource type="VisualShaderNodeVectorDecompose" id="VisualShaderNodeVectorDecompose_ck81a"]
+default_input_values = [0, Quaternion(0, 0, 0, 0)]
+op_type = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_l4cyl"]
+default_input_values = [0, 0.0, 1, 1.0]
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_add, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform float hit_fade;
+
+
+// GlobalExpression:0
+	varying vec4 instance_custom_data;
+
+void vertex() {
+	vec4 n_out3p0;
+// Expression:3
+	n_out3p0 = vec4(0.0, 0.0, 0.0, 0.0);
+	{
+		instance_custom_data = INSTANCE_CUSTOM;
+	}
+
+
+// VectorDecompose:4
+	float n_out4p0 = n_out3p0.x;
+	float n_out4p1 = n_out3p0.y;
+	float n_out4p2 = n_out3p0.z;
+	float n_out4p3 = n_out3p0.w;
+
+
+// FloatOp:5
+	float n_in5p1 = 1.00000;
+	float n_out5p0 = n_out4p3 + n_in5p1;
+
+
+// Output:0
+	COLOR.a = n_out5p0;
+
+
+}
+
+void fragment() {
+// ColorConstant:4
+	vec4 n_out4p0 = vec4(1.000000, 0.000000, 0.000000, 1.000000);
+
+
+// FloatParameter:2
+	float n_out2p0 = hit_fade;
+
+
+	float n_out14p0;
+// Expression:14
+	n_out14p0 = 0.0;
+	{
+		n_out14p0 = instance_custom_data.x;
+	}
+
+
+// FloatOp:13
+	float n_out13p0 = n_out2p0 + n_out14p0;
+
+
+// VectorOp:10
+	vec4 n_out10p0 = n_out4p0 * vec4(n_out13p0);
+
+
+// Output:0
+	ALBEDO = vec3(n_out10p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(-648.74, -79.1879)
+modes/blend = 1
+nodes/vertex/0/position = Vector2(660, 160)
+nodes/vertex/2/node = SubResource("VisualShaderNodeGlobalExpression_7sbo8")
+nodes/vertex/2/position = Vector2(-1240, 40)
+nodes/vertex/2/size = Vector2(814.347, 246.259)
+nodes/vertex/2/input_ports = ""
+nodes/vertex/2/output_ports = ""
+nodes/vertex/2/expression = "varying vec4 instance_custom_data;"
+nodes/vertex/3/node = SubResource("VisualShaderNodeExpression_yg2rf")
+nodes/vertex/3/position = Vector2(-1240, 300)
+nodes/vertex/3/size = Vector2(814.347, 322.436)
+nodes/vertex/3/input_ports = ""
+nodes/vertex/3/output_ports = "0,5,isntance_custom_data;"
+nodes/vertex/3/expression = "instance_custom_data = INSTANCE_CUSTOM;"
+nodes/vertex/4/node = SubResource("VisualShaderNodeVectorDecompose_ck81a")
+nodes/vertex/4/position = Vector2(-260, 320)
+nodes/vertex/5/node = SubResource("VisualShaderNodeFloatOp_l4cyl")
+nodes/vertex/5/position = Vector2(104.327, 496.424)
+nodes/vertex/connections = PackedInt32Array(3, 0, 4, 0, 4, 3, 5, 0, 5, 0, 0, 7)
+nodes/fragment/0/position = Vector2(280, 80)
+nodes/fragment/2/node = SubResource("VisualShaderNodeFloatParameter_fe6r4")
+nodes/fragment/2/position = Vector2(-1040, 120)
+nodes/fragment/4/node = SubResource("VisualShaderNodeColorConstant_alg50")
+nodes/fragment/4/position = Vector2(-320, -200)
+nodes/fragment/10/node = SubResource("VisualShaderNodeVectorOp_mmdnd")
+nodes/fragment/10/position = Vector2(0, 0)
+nodes/fragment/13/node = SubResource("VisualShaderNodeFloatOp_nkhoy")
+nodes/fragment/13/position = Vector2(-300, 80)
+nodes/fragment/14/node = SubResource("VisualShaderNodeExpression_v33s1")
+nodes/fragment/14/position = Vector2(-1320, 380)
+nodes/fragment/14/size = Vector2(637.207, 400.692)
+nodes/fragment/14/input_ports = ""
+nodes/fragment/14/output_ports = "0,0,hit_fade;"
+nodes/fragment/14/expression = "hit_fade = instance_custom_data.x;"
+nodes/fragment/connections = PackedInt32Array(4, 0, 10, 0, 2, 0, 13, 0, 13, 0, 10, 1, 14, 0, 13, 1, 10, 0, 0, 0)

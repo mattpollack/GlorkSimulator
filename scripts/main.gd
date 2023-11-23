@@ -37,7 +37,7 @@ var news_i = 0
 var tutorial = [
 	"Welcome to glork simulator!",
 	"The goal of the game is to consume everything until you're big enough to eat the whole planet!",
-	"W,A,S,D to move and mouse to look around.",
+	"W,A,S,D to move and mouse to look around. You'll automatically eat close by targets, so move towards them!",
 	"As you consume you get mass, which acts as your money, size, and health.",
 	"The game is over once you hit 15k!", 
 	"Over here are achievements, which give you boosts of mass. You should do these!",
@@ -86,13 +86,10 @@ func _ready():
 	pause_menu.hide()
 	upgrade_hud.hide()
 	bottom_hud.hide()
+	tutorial_nodes.hide()
 
 	# OFF FOR NOW
-	#theme.play()
-	
-	if play_tutorial:
-		Utils.paused = true
-		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	theme.play()
 	
 
 func _input(e : InputEvent):
@@ -122,16 +119,24 @@ func _play_news():
 	news_body.text = news[news.keys()[news_i]]
 	news_i += 1
 
+var tutorial_delay : float = 0
+
 func _process(delta):
-	if play_tutorial and tutorial_i < tutorial.size():
+	if play_tutorial and tutorial_i < tutorial.size() and tutorial_delay >= 0.35:
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+		Utils.paused = true
+		tutorial_nodes.show()
 		return
+
+	# need to add a delay for some reason
+	tutorial_delay += delta
 	
 	if news_playing:
 		theme.volume_db = lerp(theme.volume_db, -30.0, delta)
 	else:
 		theme.volume_db = lerp(theme.volume_db, -5.0, delta)
 	
-	bottom_hud.position = lerp(bottom_hud.position, bottom_hud_initial_pos, delta)
+	bottom_hud.position = lerp(bottom_hud.position, bottom_hud_initial_pos, delta * 3)
 	
 	if news_i < news.size() and news.keys()[news_i] <= player.mass_max:
 		_play_news()

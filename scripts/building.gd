@@ -11,6 +11,9 @@ var hp := max_hp
 var hp_bar_scene : PackedScene = preload("res://scenes/hp_bar.tscn")
 var hp_bar : HpBar
 var mass = 20
+var last_hit_frames : float = 100
+
+var death_particles = preload("res://scenes/building_death.tscn")
 
 func _ready():
 	#hp_bar = hp_bar_scene.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
@@ -19,14 +22,21 @@ func _ready():
 	pass
 
 func _process(delta):
-	#hp_bar.set_hp(float(hp)/float(max_hp))
-	pass
+	last_hit_frames += delta
+	
+	if last_hit_frames <= 2.0:
+		mm.multimesh.set_instance_custom_data(i, Color(1 - clampf(last_hit_frames * 4, 0.0, 1.0), 0, 0))
 
 func hit(node, dmg_base : float = 1.0):
 	hp -= dmg_base
+	last_hit_frames = 0
 	
 	if hp <= 0:
 		mm.multimesh.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3(0, -6000, 0)))
+		
+		var particles = death_particles.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
+		particles.global_transform = global_transform
+		get_tree().root.add_child(particles)
 		
 		if node != null and node.get("caught_objects") != null:
 			reparent(node.caught_objects)

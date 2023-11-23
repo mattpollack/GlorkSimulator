@@ -15,6 +15,7 @@ class_name Tentacle
 @onready var caught_objects = $Armature/Skeleton3D/tentacle_end/attack_place/caught_objects
 @onready var attack_place_shape = $Armature/Skeleton3D/tentacle_end/attack_place/attack_place_shape
 @onready var attack_place = $Armature/Skeleton3D/tentacle_end/attack_place
+@onready var hit_sound = $Armature/target_ik/hit_sound
 
 var prev_pos := Vector3.ZERO
 var offset : float = 20.0
@@ -51,6 +52,7 @@ func _process(delta):
 				if target_ik.global_position.distance_to(attack_target.global_position) < delta * attack_speed or tentacle_end.global_position.distance_to(target_ik.global_position) > delta * attack_speed:
 					attack_state = "in"
 					attack_target.hit(self, player.damage)
+					hit_sound.play()
 				else:
 					target_ik.global_position -= (target_ik.global_position - attack_target.global_position).normalized() * delta * attack_speed
 			"in":

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cngm45w67n7qa"]
+[gd_scene load_steps=13 format=3 uid="uid://cngm45w67n7qa"]
 
 [ext_resource type="PackedScene" uid="uid://64eleh7ydmn3" path="res://raw/tentacle.blend" id="1_dlp8m"]
 [ext_resource type="Script" path="res://scripts/tentacle.gd" id="2_h5sx8"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/tentacle_target_ik.gd" id="4_c80dg"]
 [ext_resource type="Script" path="res://scripts/tentacle_attack_place.gd" id="4_etxsv"]
 [ext_resource type="Script" path="res://scripts/tentacle_target_step.gd" id="4_f4mfy"]
+[ext_resource type="AudioStream" uid="uid://dcjmy1cs5w1fx" path="res://raw/523769__matrixxx__retro-hit.wav" id="6_xxfnn"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mdii6"]
 
@@ -60,6 +61,13 @@ mesh = SubResource("SphereMesh_o5388")
 
 [node name="tentacle_tip_shape" type="CollisionShape3D" parent="Armature/target_ik/Area3D" index="0"]
 shape = SubResource("SphereShape3D_mdii6")
+
+[node name="hit_sound" type="AudioStreamPlayer3D" parent="Armature/target_ik" index="2"]
+stream = ExtResource("6_xxfnn")
+volume_db = -25.532
+unit_size = 6000.0
+max_db = -11.042
+pitch_scale = 3.17
 
 [node name="target_step_container" type="Node3D" parent="Armature" index="2"]
 

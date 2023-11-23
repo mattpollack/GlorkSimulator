@@ -11,6 +11,7 @@ class_name Bomb
 @onready var bomb = $bomb_align/bomb
 @onready var aftermath = $aftermath
 @onready var area_3d = $Area3D
+@onready var explosion_sound = $explosion_sound
 
 var collided = {}
 var target := Vector3(0, 0, 0)
@@ -35,6 +36,7 @@ func explode():
 	explosion.explode()
 	aftermath.show()
 	exploded = true
+	explosion_sound.play()
 	
 	for n in collided:
 		if n.get("hit") != null:

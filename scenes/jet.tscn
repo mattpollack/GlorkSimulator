@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://b5n2trmxf7ixt"]
+[gd_scene load_steps=7 format=3 uid="uid://b5n2trmxf7ixt"]
 
 [ext_resource type="PackedScene" uid="uid://cxfxknbrk6rs8" path="res://raw/jet.blend" id="1_few1c"]
 [ext_resource type="Script" path="res://scripts/jet.gd" id="2_e0qge"]
 [ext_resource type="Script" path="res://scripts/jet_target.gd" id="3_yetgf"]
+[ext_resource type="AudioStream" uid="uid://b1nfxhworlww4" path="res://raw/318969__dewaholic__kick-hard-8-bit.wav" id="4_fndls"]
+[ext_resource type="AudioStream" uid="uid://b3208jbxtace7" path="res://raw/444855__matrixxx__jet.wav" id="5_n2gs5"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_01x4t"]
 radius = 10.815
@@ -19,5 +21,20 @@ script = ExtResource("3_yetgf")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="jet_meshes/Area3D"]
 transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 13.0833, 0, 0)
 shape = SubResource("CapsuleShape3D_01x4t")
+
+[node name="shoot_sound" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0876465, 0.0810337)
+stream = ExtResource("4_fndls")
+volume_db = -6.808
+unit_size = 2000.0
+max_db = 0.048
+pitch_scale = 5.0
+max_polyphony = 6
+
+[node name="jet_sound" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_n2gs5")
+volume_db = -4.681
+unit_size = 2000.0
+pitch_scale = 0.84
 
 [editable path="jet_meshes"]

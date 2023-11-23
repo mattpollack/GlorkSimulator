@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dqmfjr4nc2rqj"]
+
+[sub_resource type="Curve" id="Curve_2ju0b"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_opgrm"]
+curve = SubResource("Curve_2ju0b")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_422np"]
+emission_shape = 3
+emission_box_extents = Vector3(10, 30, 10)
+direction = Vector3(1, 1, 1)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 5.83
+initial_velocity_max = 32.07
+radial_accel_min = -2.68
+radial_accel_max = 1.99
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_opgrm")
+collision_use_scale = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ehd7b"]
+albedo_color = Color(0.490196, 0.490196, 0.490196, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nabxm"]
+material = SubResource("StandardMaterial3D_ehd7b")
+size = Vector3(3, 3, 3)
+
+[node name="building_death" type="Node3D"]
+
+[node name="particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23, 0)
+amount = 50
+lifetime = 4.65
+one_shot = true
+speed_scale = 2.25
+explosiveness = 1.0
+collision_base_size = 6.0
+visibility_aabb = AABB(-9.09578, -22.443, -9.5915, 18.1916, 44.886, 19.183)
+process_material = SubResource("ParticleProcessMaterial_422np")
+draw_pass_1 = SubResource("BoxMesh_nabxm")

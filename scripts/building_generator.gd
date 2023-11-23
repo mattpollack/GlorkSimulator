@@ -23,6 +23,7 @@ func _ready():
 		multi_mesh.multimesh = MultiMesh.new()
 		multi_mesh.multimesh.mesh = mesh
 		multi_mesh.multimesh.transform_format = MultiMesh.TRANSFORM_3D
+		multi_mesh.multimesh.use_custom_data = true
 		multi_mesh_map[k] = multi_mesh
 		add_child(multi_mesh)
 	
