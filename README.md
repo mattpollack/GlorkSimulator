@@ -1,5 +1,7 @@
 # Glork Simulator
 
+https://mattpollack.itch.io/glork-simulator
+
 Glork simulator is an alien invasion style game where the player is a "glork", a species of planet devouring tentacle beasts, whose main profession is the takeover and selling of planets. The game loop involves landing on unsuspecting planets then 	devouring its inhabitants, infrastructure, and military, all while growing in size until the player is large enough to consume the planet entirely. Mass represents health, upgrade costs, reach, as well as the main winning condition, which is accumulated proportionally to what the player devours. When a planet is consumed, its value is scored and added to the players total. For each planet consumed, subsequent planets are alerted, making each consumption harder. 
 
 ### Mass 
