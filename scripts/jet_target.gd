@@ -8,6 +8,7 @@ func hit(node : Node3D, dmg_base : float = 1.0):
 	jet.hp -= dmg_base
 	
 	if jet.hp <= 0:
+		jet.achievement_manager.killed("jet")
 		if node != null and node.get("caught_objects") != null:
 			jet.reparent(node.caught_objects)
 		jet.dead = true

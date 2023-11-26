@@ -41,12 +41,12 @@ func _process(delta : float):
 
 	m.lock()
 	
-	_process_mm(delta, mm_bullet, "bullet_i", "bullet_t", 500)
-	_process_mm(delta, mm_laser, "laser_i", "laser_t", 5000)
+	_process_mm(delta, mm_bullet, "bullet_i", "bullet_t", 500, 1.5)
+	_process_mm(delta, mm_laser, "laser_i", "laser_t", 5000, 15)
 	
 	m.unlock()
 
-func _process_mm(delta : float, mm : MultiMeshInstance3D, i_str, t_str, speed):
+func _process_mm(delta : float, mm : MultiMeshInstance3D, i_str, t_str, speed, damage):
 	var i : int = get(i_str)
 	var t : int = get(t_str)
 	
@@ -68,7 +68,7 @@ func _process_mm(delta : float, mm : MultiMeshInstance3D, i_str, t_str, speed):
 			i = i % total
 			t = max(t - 1, 0)
 			mm.multimesh.set_instance_transform(s, Transform3D(Basis.IDENTITY, Vector3(0, -60000, 0)))
-			player.hit(null)
+			player.hit(null, damage)
 		else:
 			mm.multimesh.set_instance_transform(s, moved)
 	

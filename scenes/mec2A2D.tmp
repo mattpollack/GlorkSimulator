@@ -1,0 +1,217 @@
+[gd_scene load_steps=18 format=3 uid="uid://btjqowh2p16x5"]
+
+[ext_resource type="Script" path="res://scripts/mech.gd" id="1_4wnik"]
+[ext_resource type="PackedScene" uid="uid://cx0c3f8n6wd08" path="res://raw/mech.blend" id="1_m5y15"]
+[ext_resource type="Script" path="res://scripts/mech_target.gd" id="3_iq8lu"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3r71t"]
+animation = &"idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_576qm"]
+animation = &"run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_8fpr2"]
+animation = &"shoot"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7458e"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_l62e1"]
+xfade_time = 0.5
+advance_mode = 2
+advance_condition = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0ad4g"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"shoot"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7k6gg"]
+xfade_time = 0.5
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6jk3g"]
+xfade_time = 0.5
+advance_mode = 2
+advance_condition = &"idle"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dkrie"]
+xfade_time = 0.1
+advance_mode = 2
+advance_condition = &"run"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8sl7f"]
+xfade_time = 0.5
+advance_mode = 2
+advance_condition = &"shoot"
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_kbpvn"]
+states/idle/node = SubResource("AnimationNodeAnimation_3r71t")
+states/idle/position = Vector2(357.333, 27.3334)
+states/run/node = SubResource("AnimationNodeAnimation_576qm")
+states/run/position = Vector2(449.333, 110.667)
+states/shoot/node = SubResource("AnimationNodeAnimation_8fpr2")
+states/shoot/position = Vector2(348, 206.667)
+transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_7458e"), "idle", "run", SubResource("AnimationNodeStateMachineTransition_l62e1"), "run", "shoot", SubResource("AnimationNodeStateMachineTransition_0ad4g"), "shoot", "idle", SubResource("AnimationNodeStateMachineTransition_7k6gg"), "run", "idle", SubResource("AnimationNodeStateMachineTransition_6jk3g"), "shoot", "run", SubResource("AnimationNodeStateMachineTransition_dkrie"), "idle", "shoot", SubResource("AnimationNodeStateMachineTransition_8sl7f")]
+graph_offset = Vector2(-115, -55)
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ul8py"]
+radius = 41.6215
+height = 117.503
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_pm2m3"]
+direction = Vector3(-1, 0, 0)
+spread = 15.61
+gravity = Vector3(0, -98, 0)
+initial_velocity_min = 14.58
+initial_velocity_max = 14.58
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_hqhq4"]
+height = 5.125
+
+[node name="mech" type="Node3D"]
+script = ExtResource("1_4wnik")
+
+[node name="mech" parent="." instance=ExtResource("1_m5y15")]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
+
+[node name="Skeleton3D" parent="mech/Armature" index="0"]
+bones/0/position = Vector3(-2.37772e-16, -0.118065, -0.119592)
+bones/3/rotation = Quaternion(-0.124195, 0.100157, -0.651968, 0.741271)
+bones/4/rotation = Quaternion(0.302938, -0.0170283, 0.0256123, 0.952514)
+bones/5/rotation = Quaternion(-0.100535, -0.000238873, 0.000298072, 0.994934)
+bones/12/rotation = Quaternion(-0.124195, -0.100157, 0.651968, 0.741271)
+bones/13/rotation = Quaternion(0.302938, 0.0170282, -0.0256124, 0.952514)
+bones/14/rotation = Quaternion(-0.0949093, -9.1296e-06, -0.0025362, 0.995483)
+bones/22/rotation = Quaternion(0.231859, 0.132865, -0.668013, 0.694512)
+bones/23/rotation = Quaternion(-0.184815, -6.33299e-08, -0.10658, 0.976977)
+bones/24/rotation = Quaternion(0.117543, 6.37046e-08, 0.0677854, 0.990752)
+bones/25/rotation = Quaternion(0.466876, 8.19564e-08, 0.269241, 0.84234)
+bones/30/rotation = Quaternion(0.231859, -0.132865, 0.668013, 0.694512)
+bones/31/rotation = Quaternion(-0.184815, 7.45058e-08, 0.10658, 0.976977)
+bones/32/rotation = Quaternion(0.117543, -5.75637e-08, -0.0677854, 0.990752)
+bones/33/rotation = Quaternion(0.466876, -7.45058e-08, -0.269241, 0.84234)
+
+[node name="arm-lower-left" parent="mech/Armature/Skeleton3D" index="0"]
+transform = Transform3D(0.982425, -0.0083486, 0.186472, 0.180688, 0.293201, -0.938821, -0.046836, 0.956015, 0.289556, 9.15096, 0.719496, -0.687551)
+bone_idx = 6
+
+[node name="gun-case-left" parent="mech/Armature/Skeleton3D" index="1"]
+transform = Transform3D(0.982425, -0.0083486, 0.186472, 0.180688, 0.293201, -0.938821, -0.046836, 0.956015, 0.289556, 9.75492, -2.85922, -1.80385)
+bone_idx = 7
+
+[node name="gun-chamber-left" parent="mech/Armature/Skeleton3D" index="2"]
+transform = Transform3D(0.982425, -0.0083486, 0.186472, 0.180688, 0.293201, -0.938821, -0.046836, 0.956015, 0.289556, 9.90039, -3.59039, -1.57123)
+bone_idx = 8
+
+[node name="gun-mag-left" parent="mech/Armature/Skeleton3D" index="3"]
+transform = Transform3D(0.982425, -0.0083486, 0.186472, 0.180688, 0.293201, -0.938821, -0.046836, 0.956015, 0.289556, 8.58881, 2.40826, -5.93969)
+bone_idx = 9
+
+[node name="arm-upper-left" parent="mech/Armature/Skeleton3D" index="4"]
+transform = Transform3D(0.991447, -0.128208, 0.0244005, 0.129814, 0.98805, -0.0831005, -0.0134548, 0.0855573, 0.996242, 8.09477, 6.9717, -0.45627)
+bone_idx = 10
+
+[node name="arm-upper-right" parent="mech/Armature/Skeleton3D" index="5"]
+transform = Transform3D(0.982425, 0.00834862, -0.186472, -0.180688, 0.2932, -0.938821, 0.046836, 0.956014, 0.289556, -9.15047, 0.721819, -0.687789)
+bone_idx = 15
+
+[node name="gun-case-right" parent="mech/Armature/Skeleton3D" index="6"]
+transform = Transform3D(0.982425, 0.00834862, -0.186472, -0.180688, 0.2932, -0.938821, 0.046836, 0.956014, 0.289556, -9.75486, -2.85988, -1.80358)
+bone_idx = 16
+
+[node name="gun-chamber-right" parent="mech/Armature/Skeleton3D" index="7"]
+transform = Transform3D(0.982425, 0.00834862, -0.186472, -0.180688, 0.2932, -0.938821, 0.046836, 0.956014, 0.289556, -9.8994, -3.59005, -1.57221)
+bone_idx = 17
+
+[node name="gun-mag-right" parent="mech/Armature/Skeleton3D" index="8"]
+transform = Transform3D(0.982425, 0.00834862, -0.186472, -0.180688, 0.2932, -0.938821, 0.046836, 0.956014, 0.289556, -8.5888, 2.40826, -5.9397)
+bone_idx = 18
+
+[node name="arm-upper-right_001" parent="mech/Armature/Skeleton3D" index="9"]
+transform = Transform3D(0.991447, 0.128208, -0.0244005, -0.129814, 0.98805, -0.0831005, 0.0134548, 0.0855573, 0.996242, -8.09445, 6.97117, -0.455931)
+bone_idx = 19
+
+[node name="body" parent="mech/Armature/Skeleton3D" index="10"]
+transform = Transform3D(1, 0, 2.84217e-14, 0, 1, -3.72529e-09, 2.84217e-14, -3.72529e-09, 1, -0.0147021, 7.41014, 0.0791016)
+bone_idx = 20
+
+[node name="foot-left" parent="mech/Armature/Skeleton3D" index="11"]
+transform = Transform3D(1, 1.16179e-07, -2.08616e-07, -8.47504e-08, 0.999919, -0.0127231, -1.19209e-07, 0.012723, 0.999919, 4.26821, -14.281, -1.20922)
+bone_idx = 26
+
+[node name="leg-lower-left" parent="mech/Armature/Skeleton3D" index="12"]
+transform = Transform3D(1, 8.19564e-08, 0, -7.45058e-08, 0.999943, -0.0106973, -1.49012e-07, 0.0106974, 0.999943, 4.26811, -9.74559, -0.0382451)
+bone_idx = 27
+
+[node name="leg-upper-left" parent="mech/Armature/Skeleton3D" index="13"]
+transform = Transform3D(1, 1.3411e-07, -8.9407e-08, -1.71363e-07, 0.928536, -0.371242, -2.98023e-08, 0.371242, 0.928536, 4.26648, -2.29045, 0.386781)
+bone_idx = 28
+
+[node name="foot-right" parent="mech/Armature/Skeleton3D" index="14"]
+transform = Transform3D(1, -1.39058e-07, 1.78814e-07, 1.2666e-07, 0.999919, -0.012723, 1.78814e-07, 0.0127229, 0.999919, -4.26761, -14.2829, -1.20819)
+bone_idx = 34
+
+[node name="leg-lower-right" parent="mech/Armature/Skeleton3D" index="15"]
+transform = Transform3D(1, -7.45058e-08, -2.98023e-08, 8.9407e-08, 0.999943, -0.0106973, 2.08616e-07, 0.0106972, 0.999943, -4.26777, -9.74503, -0.0380779)
+bone_idx = 35
+
+[node name="leg-upper-right" parent="mech/Armature/Skeleton3D" index="16"]
+transform = Transform3D(1, -1.78814e-07, 5.96046e-08, 2.16067e-07, 0.928536, -0.371242, 5.96046e-08, 0.371241, 0.928536, -4.26784, -2.29233, 0.386791)
+bone_idx = 36
+
+[node name="hip" parent="mech/Armature/Skeleton3D" index="17"]
+transform = Transform3D(1, -2.68222e-22, -7.10543e-15, -2.68222e-22, 1, 0, -7.10543e-15, 0, 1, -0.0082311, 0.917456, 0.117703)
+bone_idx = 37
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_kbpvn")
+anim_player = NodePath("../mech/AnimationPlayer")
+active = true
+parameters/conditions/idle = false
+parameters/conditions/run = false
+parameters/conditions/shoot = false
+
+[node name="Area3D" type="Area3D" parent="." groups=["enemy"]]
+script = ExtResource("3_iq8lu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 58.9657, 0)
+shape = SubResource("CapsuleShape3D_ul8py")
+
+[node name="arm-lower-l" type="BoneAttachment3D" parent="."]
+transform = Transform3D(-3.92923, 0.739633, 0.118604, -0.724669, -3.9136, 0.398236, 0.189679, 0.369703, 3.97836, 38.5764, 57.4368, 2.08546)
+bone_name = "arm-lower.L.001"
+bone_idx = 5
+use_external_skeleton = true
+external_skeleton = NodePath("../mech/Armature/Skeleton3D")
+
+[node name="GPUParticles3D" type="GPUParticles3D" parent="arm-lower-l"]
+emitting = false
+lifetime = 2.0
+speed_scale = 2.0
+process_material = SubResource("ParticleProcessMaterial_pm2m3")
+draw_pass_1 = SubResource("CylinderMesh_hqhq4")
+
+[node name="fire-l" type="Node3D" parent="arm-lower-l"]
+transform = Transform3D(1, 1.95578e-08, -5.66943e-08, 3.11993e-08, 1, 2.79397e-08, 9.18953e-08, 5.58794e-09, 1, 0.0733299, 4.17292, -0.250731)
+
+[node name="arm-lower-r" type="BoneAttachment3D" parent="."]
+transform = Transform3D(-3.92587, -0.758602, -0.109976, 0.742282, -3.90555, 0.442407, -0.191281, 0.4138, 3.97394, -38.5764, 57.4368, 2.08546)
+bone_name = "arm-lower.R.001"
+bone_idx = 14
+use_external_skeleton = true
+external_skeleton = NodePath("../mech/Armature/Skeleton3D")
+
+[node name="GPUParticles3D2" type="GPUParticles3D" parent="arm-lower-r"]
+transform = Transform3D(-0.89681, 0.0288795, -0.441473, 0.026175, 0.999583, 0.012217, 0.441642, -0.000599225, -0.897192, 0, 0, 0)
+emitting = false
+lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_pm2m3")
+draw_pass_1 = SubResource("CylinderMesh_hqhq4")
+
+[node name="fire-r" type="Node3D" parent="arm-lower-r"]
+transform = Transform3D(1, 0, -1.56215e-08, 0, 1, 1.02445e-08, -7.43821e-08, -4.65661e-10, 1, -0.127924, 4.72571, -0.339983)
+
+[editable path="mech"]

@@ -68,6 +68,7 @@ volume_db = -25.532
 unit_size = 6000.0
 max_db = -11.042
 pitch_scale = 3.17
+bus = &"Effects"
 
 [node name="target_step_container" type="Node3D" parent="Armature" index="2"]
 

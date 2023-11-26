@@ -4,6 +4,7 @@ class_name Person
 
 @export var player : Spider
 @export var bullet_manager : BulletManager
+@export var achievement_manager : AchievementManager
 @onready var collision_shape_3d = $CollisionShape3D
 
 @onready var animation_tree : AnimationTree = $AnimationTree
@@ -81,12 +82,13 @@ func _process(delta):
 	translate_object_local(Vector3.BACK * delta * 8)
 	global_position = global_position.move_toward(Vector3(0, -6000, 0), global_position.distance_to(Vector3(0, -6000, 0)) - 5984)
 	
-	var gravity = (Vector3(0, -6000, 0) - global_position).normalized() * 9.81 * delta
+	#var gravity = (Vector3(0, -6000, 0) - global_position).normalized() * 9.81 * delta
 
 func hit(node : Node3D, dmg_base : float = 1.0):
 	last_hit_frames = 0
 	hp -= dmg_base
 	if hp <= 0 and !dead:
+		achievement_manager.killed("citizen")
 		body.get_surface_override_material(0).next_pass.set_shader_parameter("hit_fade", 1)
 		collision_shape_3d.queue_free()
 		if node != null and node.get("caught_objects") != null:

@@ -27,11 +27,6 @@ As the players mass grows, so does the planets military strength. Here are units
 ### TODOs
 
 ```
-
-actual death and win screens
-
-hit markers
-
 More building types
 More "city" 
 
@@ -39,22 +34,11 @@ Planet coloring
 
 Head clipping 
 
-Separate attack/move tentacle
-
 Bullets that collide with buildings
-
-Damage decals on building
 
 Going under buildings, body collision
 
-Achievements 
- - Can be the tutorial???
-
-Hit indications
-
 "wanted level"
-
-Variety in building texture 
 
 FIX THE LASER | DON'T MAKE IT A PROJECTILE
 

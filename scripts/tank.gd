@@ -4,6 +4,7 @@ class_name Tank
 
 @export var player : Spider
 @export var bullet_manager : BulletManager
+@export var achievement_manager : AchievementManager
 
 @onready var back_wheels : MeshInstance3D = $"tank/back-wheels"
 @onready var front_wheels : MeshInstance3D = $"tank/front-wheels"
@@ -75,6 +76,7 @@ func hit(node : Node3D, dmg_base : float = 1.0):
 	hp -= dmg_base
 	last_hit_frames = 0
 	if hp <= 0 and !dead:
+		achievement_manager.killed("tank")
 		chassis.get_surface_override_material(0).next_pass.set_shader_parameter("hit_fade", 1)
 		main_collision.queue_free()
 		attack_collision.queue_free()

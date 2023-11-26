@@ -4,6 +4,7 @@ class_name Bomb
 
 @export var player : Spider 
 @export var bullet_manager : BulletManager
+@export var achievement_manager : AchievementManager
 
 @onready var decal = $decal
 @onready var explosion : Explosion = $explosion
@@ -17,7 +18,7 @@ var collided = {}
 var target := Vector3(0, 0, 0)
 var height := 500
 var exploded := false
-var delay := 10
+var delay := 2
 
 func _ready():
 	# drop on the player

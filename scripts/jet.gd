@@ -4,6 +4,7 @@ extends Node3D
 
 @export var player : Spider
 @export var bullet_manager : BulletManager
+@export var achievement_manager : AchievementManager
 @onready var shoot_sound = $shoot_sound
 @onready var jet_sound = $jet_sound
 

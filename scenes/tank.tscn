@@ -69,5 +69,6 @@ volume_db = -7.234
 unit_size = 100.0
 max_db = -4.101
 pitch_scale = 5.0
+bus = &"Effects"
 
 [editable path="tank"]

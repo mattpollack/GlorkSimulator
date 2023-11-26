@@ -18,7 +18,7 @@ class_name Tentacle
 @onready var hit_sound = $Armature/target_ik/hit_sound
 
 var prev_pos := Vector3.ZERO
-var offset : float = 20.0
+var offset : float = 4.0
 var should_step := true
 var should_attack := false
 var attack_target : Node3D 
@@ -40,6 +40,7 @@ func _process(delta):
 	attack_place.should_attack = should_attack
 
 	var velocity = self.global_position - prev_pos
+	var rest_pos = self.global_transform.translated_local(Vector3(0, 0, 2)).origin
 	prev_pos = self.global_position
 	
 	if should_step:
@@ -56,7 +57,7 @@ func _process(delta):
 				else:
 					target_ik.global_position -= (target_ik.global_position - attack_target.global_position).normalized() * delta * attack_speed
 			"in":
-				if target_ik.global_position.distance_to(self.global_position) < delta * attack_speed:
+				if target_ik.global_position.distance_to(rest_pos) < delta * attack_speed:
 					attack_state = "out"
 					attack_target = null
 					
@@ -64,11 +65,11 @@ func _process(delta):
 						player.killed(n)
 						n.queue_free()
 				else:
-					target_ik.global_position -= (target_ik.global_position - self.global_position).normalized() * delta * attack_speed
+					target_ik.global_position -= (target_ik.global_position - rest_pos).normalized() * delta * attack_speed
 	else:
 		for n in caught_objects.get_children():
 			player.killed(n)
 			n.queue_free()
 		
-		target_step_container.global_position = self.global_position
+		target_step_container.global_position = rest_pos
 		target_ik.global_position = lerp(target_ik.global_position, target_step_container.global_position, delta * 10)

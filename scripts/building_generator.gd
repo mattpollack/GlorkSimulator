@@ -3,6 +3,7 @@ extends Node3D
 class_name BuildingGenerator
 
 @export var player : Spider
+@export var achievement_manager : AchievementManager
 
 var mesh_map := {
 	"road": preload("res://raw/meshes/buildings/road.res"),
@@ -140,6 +141,7 @@ func _build():
 		static_body.mm = mm
 		static_body.i = instance_is[b.kind]
 		static_body.player = player
+		static_body.achievement_manager = achievement_manager
 
 		add_child(static_body)
 		

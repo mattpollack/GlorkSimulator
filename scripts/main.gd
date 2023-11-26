@@ -12,6 +12,8 @@ extends Node3D
 @onready var pause_menu = $UI/pause_menu
 @onready var tutorial_nodes = $UI/tutorial
 @onready var tutorial_text = $UI/tutorial/dialog/_/_2/tutorial_text
+@onready var game_over = $UI/game_over
+@onready var win_menu = $UI/win_menu
 
 var show_upgrades := false
 var upgrade_tentacle_count := 1
@@ -76,6 +78,8 @@ func _on_tutorial_next_pressed():
 			c.hide()
 
 func _ready():
+	play_tutorial = Utils.tutorial
+	
 	news_timer.timeout.connect(func():
 		news_hud.hide()
 		news_playing = false)
@@ -87,10 +91,7 @@ func _ready():
 	upgrade_hud.hide()
 	bottom_hud.hide()
 	tutorial_nodes.hide()
-
-	# OFF FOR NOW
-	theme.play()
-	
+	game_over.hide()
 
 func _input(e : InputEvent):
 	if e.is_action_pressed("pause"):
@@ -122,6 +123,15 @@ func _play_news():
 var tutorial_delay : float = 0
 
 func _process(delta):
+	if Utils.game_over:
+		Utils.paused = true
+		game_over.show()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
+	if Utils.game_win:
+		win_menu.show()
+		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
+	
 	if play_tutorial and tutorial_i < tutorial.size() and tutorial_delay >= 0.35:
 		Input.set_mouse_mode(Input.MOUSE_MODE_VISIBLE)
 		Utils.paused = true
@@ -132,9 +142,9 @@ func _process(delta):
 	tutorial_delay += delta
 	
 	if news_playing:
-		theme.volume_db = lerp(theme.volume_db, -30.0, delta)
+		AudioServer.set_bus_volume_db(2, lerpf(AudioServer.get_bus_volume_db(2), -30.0, delta))
 	else:
-		theme.volume_db = lerp(theme.volume_db, -5.0, delta)
+		AudioServer.set_bus_volume_db(2, lerpf(AudioServer.get_bus_volume_db(2), 0, delta))
 	
 	bottom_hud.position = lerp(bottom_hud.position, bottom_hud_initial_pos, delta * 3)
 	
@@ -188,4 +198,8 @@ func _on_upgrade_damage_gui_input(e : InputEvent):
 			$UI/upgrade_hud/_/_/_/upgrade_damage/bg/quantity.text = "%d" % upgrade_damage_count
 			$UI/upgrade_hud/_/_/_/upgrade_damage/price.text = "$ %d" % price_new
 
-
+func _on_retry_pressed():
+	Utils.paused = false
+	Utils.game_over = false
+	Utils.game_win = false
+	get_tree().change_scene_to_file("res://game.tscn")

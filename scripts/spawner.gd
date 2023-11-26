@@ -4,6 +4,7 @@ class_name Spawner
 
 @export var player : Spider
 @export var bullet_manager : BulletManager
+@export var achievement_manager : AchievementManager
 
 var rg : RandomNumberGenerator
 var mass_max_threat : float = 10000
@@ -48,9 +49,17 @@ var unit_dict = {
 	"jet" = MilitaryUnit.new(
 		preload("res://scenes/jet.tscn"),
 		func(threat : float, last_spawn : float) -> bool:
-			return threat >= 100 and last_spawn >=  clamp(5 - threat * 500/15000 + 1, 5, 20)
+			return threat >= 100 and last_spawn >= clamp(5 - threat * 500/15000 + 1, 5, 20)
 			,
 		SpawnKind.AIR,
+		200,
+	),
+	"mech" = MilitaryUnit.new(
+		preload("res://scenes/mech.tscn"),
+		func(threat : float, last_spawn : float) -> bool:
+			return threat >= 400 and last_spawn >= 20
+			,
+		SpawnKind.GROUND,
 		200,
 	),
 	"satellite" = MilitaryUnit.new(
@@ -99,8 +108,9 @@ func _spawn(unit : MilitaryUnit):
 	var unit_node = unit.scene.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)
 	unit_node.player = player
 	unit_node.bullet_manager = bullet_manager
+	unit_node.achievement_manager = achievement_manager
 	add_child(unit_node)
 	
 	if unit.spawn_kind == SpawnKind.GROUND:
-		unit_node.global_transform = player.global_transform.rotated_local(Vector3.UP, rg.randf_range(0, 2*PI)).translated_local(Vector3(rg.randf_range(player.width() + 50, player.width() + 100), 0, 0))
+		unit_node.global_transform = player.global_transform.rotated_local(Vector3.UP, rg.randf_range(0, 2*PI)).translated_local(Vector3(rg.randf_range(player.width() + 50, player.width() + 200), 0, 0))
 		unit_node.global_position = (unit_node.global_position as Vector3).move_toward(Vector3(0, -6000, 0), unit_node.global_position.distance_to(Vector3(0, -6000, 0)) - 5985)

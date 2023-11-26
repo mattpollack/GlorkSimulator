@@ -1,23 +1,62 @@
-[gd_scene load_steps=6 format=3 uid="uid://d1v7ih4rnhvv7"]
+[gd_scene load_steps=12 format=3 uid="uid://d1v7ih4rnhvv7"]
 
 [ext_resource type="Script" path="res://scripts/spider.gd" id="1_uwglo"]
 [ext_resource type="PackedScene" uid="uid://coyhv5qg7c5j2" path="res://raw/player.blend" id="2_87052"]
+[ext_resource type="AudioStream" uid="uid://cdet6beh6sfpo" path="res://raw/445117__breviceps__cartoon-splat.wav" id="2_b0u53"]
 [ext_resource type="Script" path="res://scripts/spider_target.gd" id="3_7la6g"]
+
+[sub_resource type="Curve" id="Curve_7bgp0"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_poaos"]
+curve = SubResource("Curve_7bgp0")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hqx3s"]
+direction = Vector3(1, 1, 1)
+spread = 180.0
+gravity = Vector3(0, 0, 0)
+initial_velocity_min = 10.0
+initial_velocity_max = 10.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_poaos")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jabp1"]
+albedo_color = Color(0.756863, 0.2, 0.839216, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_wf5bx"]
+material = SubResource("StandardMaterial3D_jabp1")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_3lasl"]
 radius = 9.90657
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_qpixf"]
-radius = 1.83955
+radius = 1.46369
 
 [node name="spider" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
 script = ExtResource("1_uwglo")
 
+[node name="death_particles" type="GPUParticles3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.04218, 0)
+emitting = false
+amount = 30
+one_shot = true
+speed_scale = 1.73
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_hqx3s")
+draw_pass_1 = SubResource("SphereMesh_wf5bx")
+
+[node name="death_sound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_b0u53")
+volume_db = -1.659
+pitch_scale = 0.74
+
 [node name="limb_leg_center" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.844209, 0)
 
 [node name="limb_arm_center" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65032, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.820158, 0)
 
 [node name="body" type="Node3D" parent="."]
 
@@ -46,7 +85,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.12225, 0)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 13.3896, 0)
-light_energy = 0.15
+light_energy = 0.25
 
 [connection signal="area_entered" from="body/player2/reach_area" to="." method="_on_reach_area_area_entered"]
 [connection signal="area_exited" from="body/player2/reach_area" to="." method="_on_reach_area_area_exited"]

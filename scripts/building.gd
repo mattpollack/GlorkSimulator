@@ -3,6 +3,7 @@ extends StaticBody3D
 class_name Building
 
 var player : Spider
+@export var achievement_manager : AchievementManager
 
 var mm : MultiMeshInstance3D
 var i : int
@@ -32,6 +33,7 @@ func hit(node, dmg_base : float = 1.0):
 	last_hit_frames = 0
 	
 	if hp <= 0:
+		achievement_manager.killed("building")
 		mm.multimesh.set_instance_transform(i, Transform3D(Basis.IDENTITY, Vector3(0, -6000, 0)))
 		
 		var particles = death_particles.instantiate(PackedScene.GEN_EDIT_STATE_DISABLED)

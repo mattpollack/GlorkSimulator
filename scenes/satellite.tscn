@@ -27,5 +27,6 @@ volume_db = -13.287
 unit_size = 6000.0
 max_db = -11.282
 pitch_scale = 0.28
+bus = &"Effects"
 
 [editable path="satellite_meshes"]

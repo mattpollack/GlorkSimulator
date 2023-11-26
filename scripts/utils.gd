@@ -14,3 +14,6 @@ static func basis_from_normal(normal : Vector3, transform : Transform3D, scale :
 	return result
 
 static var paused := false
+static var game_over := false
+static var game_win := false
+static var tutorial := true

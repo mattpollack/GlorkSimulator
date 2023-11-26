@@ -30,11 +30,13 @@ unit_size = 2000.0
 max_db = 0.048
 pitch_scale = 5.0
 max_polyphony = 6
+bus = &"Effects"
 
 [node name="jet_sound" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("5_n2gs5")
 volume_db = -4.681
 unit_size = 2000.0
 pitch_scale = 0.84
+bus = &"Effects"
 
 [editable path="jet_meshes"]

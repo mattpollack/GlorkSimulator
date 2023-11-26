@@ -101,7 +101,6 @@ void fragment() {
 
 }
 "
-graph_offset = Vector2(-648.74, -79.1879)
 modes/blend = 1
 nodes/vertex/0/position = Vector2(660, 160)
 nodes/vertex/2/node = SubResource("VisualShaderNodeGlobalExpression_7sbo8")

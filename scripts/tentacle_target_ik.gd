@@ -4,7 +4,7 @@ class_name TentacleTargetIK
 
 @onready var target_step : Marker3D = $"../target_step_container/target_step_cast/target_step"
 
-@export var step_distance : float = 16
+@export var step_distance : float = 6
 @export var speed_move : float = 6
 @export var neighbour : TentacleTargetIK
 
@@ -16,6 +16,10 @@ func _ready():
 
 func _process(delta):
 	if Utils.paused:
+		return
+	
+	if Utils.game_win:
+		target_step.global_position = Vector3(0, -12000, 0)
 		return
 	
 	if abs(global_position.distance_to(target_step.global_position)) > step_distance and (neighbour == null or neighbour.stepping == false) and should_step:
