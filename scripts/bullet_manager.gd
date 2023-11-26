@@ -61,11 +61,12 @@ func _process_mm(delta : float, mm : MultiMeshInstance3D, i_str, t_str, speed, d
 		
 		var building_close := false
 		
-		for n in player.relevant_targets:
-			if is_instance_of(n, Building) and !n.dead and (sin((moved.origin - Vector3(0, 6000, 0)).angle_to(n.global_position - Vector3(0, 6000, 0))) * 6000 < 30 and moved.origin.distance_to(n.global_position) < 100):
-				building_close = true
-				n.hit(self, damage)
-				break
+		if player.width() < 300:
+			for n in player.relevant_targets:
+				if is_instance_of(n, Building) and !n.dead and (sin((moved.origin - Vector3(0, 6000, 0)).angle_to(n.global_position - Vector3(0, 6000, 0))) * 6000 < 30 and moved.origin.distance_to(n.global_position) < 100):
+					building_close = true
+					n.hit(self, damage)
+					break
 		
 		# Clean up bullets which are far from view
 		if building_close or moved.origin.distance_to(Vector3(0, -6000, 0)) > 10000 or moved.origin.distance_to(Vector3(0, -6000, 0)) < 5985:

@@ -39,6 +39,8 @@ var achievements := [
 		return killed_units.has("tank") and killed_units["tank"] >= 10),
 	Achievement.new("Eat ten buildings", 300, func():
 		return killed_units.has("building") and killed_units["building"] >= 10),
+	Achievement.new("Eat a mech", 200, func():
+		return killed_units.has("mech") and killed_units["mech"] >= 1),
 	Achievement.new("All upgrades to level 6", 400, func():
 		return player.speed_upgrade_count >= 5 and player.durability_upgrade_count >= 5 and player.tentacles_upgrade_count >= 5 and player.damage_upgrade_count >= 5),
 	Achievement.new("Eat a jet", 200, func():
@@ -47,6 +49,8 @@ var achievements := [
 		return killed_units.has("building") and killed_units["building"] >= 100),
 	Achievement.new("Eat a satellite", 600, func():
 		return killed_units.has("satellite") and killed_units["satellite"] >= 1),
+	Achievement.new("Eat ten mechs", 200, func():
+		return killed_units.has("mech") and killed_units["mech"] >= 10),
 	Achievement.new("Eat one thousand buildings", 1000, func():
 		return killed_units.has("building") and killed_units["building"] >= 100),
 	Achievement.new("Eat ten satellites", 1000, func():
