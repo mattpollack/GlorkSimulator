@@ -24,7 +24,7 @@ func _process(delta):
 	look_at((player.aim_at_me.global_position - Vector3(0, 6000, 0)).normalized() * (global_position - Vector3(0, 6000, 0)).length(), Vector3.UP)
 	rotate_object_local(Vector3.RIGHT, PI/2)
 	
-	if global_position.distance_to(player.global_position) < 500:
+	if global_position.distance_to(player.global_position) < 400 + player.width():
 		bullet_manager.fire((fire_l.global_transform as Transform3D).scaled_local(Vector3(1.0/4.0, 1.0/4.0, 1.0/4.0)).rotated_local(Vector3.MODEL_LEFT, PI/2).looking_at(player.aim_at_me.global_position))
 		bullet_manager.fire((fire_r.global_transform as Transform3D).scaled_local(Vector3(1.0/4.0, 1.0/4.0, 1.0/4.0)).rotated_local(Vector3.MODEL_LEFT, PI/2).looking_at(player.aim_at_me.global_position))
 		shoot_sound.play()

@@ -28,6 +28,7 @@ var tentacles_leg : Array[Tentacle] = []
 var tentacles_arm : Array[Tentacle] = []
 var tentacles_upgrade_count : float = 0
 var nearby_enemies : Dictionary = {}
+var relevant_targets : Dictionary = {}
 var mass : float = 8.0
 var mass_max : float = mass
 var gravity_velocity = 0
@@ -331,3 +332,27 @@ func _on_reach_area_body_exited(body):
 		return
 
 	nearby_enemies.erase(body)
+
+func _on_close_area_area_entered(area):
+	if !area.is_in_group("enemy"):
+		return
+	
+	relevant_targets[area] = true
+
+func _on_close_area_area_exited(area):
+	if !area.is_in_group("enemy"):
+		return
+
+	relevant_targets.erase(area)
+
+func _on_close_area_body_entered(body):
+	if !body.is_in_group("enemy"):
+		return
+
+	relevant_targets[body] = true
+
+func _on_close_area_body_exited(body):
+	if !body.is_in_group("enemy"):
+		return
+
+	relevant_targets.erase(body)

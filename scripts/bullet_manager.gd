@@ -4,8 +4,10 @@ class_name BulletManager
 
 var bullet_mesh : CylinderMesh = preload("res://raw/meshes/bullet.tres")
 var laser_mesh : CylinderMesh = preload("res://raw/meshes/laser.tres")
+var bullet_scene : PackedScene = preload("res://scenes/bullet.tscn")
 
 @export var player : Spider
+@export var building_generator : BuildingGenerator
 
 const total = 5000
 
@@ -57,8 +59,16 @@ func _process_mm(delta : float, mm : MultiMeshInstance3D, i_str, t_str, speed, d
 
 		var moved := mm.multimesh.get_instance_transform(s).translated_local(Vector3.DOWN * delta * speed)
 		
+		var building_close := false
+		
+		for n in player.relevant_targets:
+			if is_instance_of(n, Building) and !n.dead and (sin((moved.origin - Vector3(0, 6000, 0)).angle_to(n.global_position - Vector3(0, 6000, 0))) * 6000 < 30 and moved.origin.distance_to(n.global_position) < 100):
+				building_close = true
+				n.hit(self, damage)
+				break
+		
 		# Clean up bullets which are far from view
-		if moved.origin.distance_to(Vector3(0, -6000, 0)) > 10000 or moved.origin.distance_to(Vector3(0, -6000, 0)) < 5985:
+		if building_close or moved.origin.distance_to(Vector3(0, -6000, 0)) > 10000 or moved.origin.distance_to(Vector3(0, -6000, 0)) < 5985:
 			i += 1
 			i = i % total
 			t = max(t - 1, 0)

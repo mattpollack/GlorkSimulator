@@ -27,14 +27,10 @@ As the players mass grows, so does the planets military strength. Here are units
 ### TODOs
 
 ```
-More building types
-More "city" 
 
 Planet coloring 
 
 Head clipping 
-
-Bullets that collide with buildings
 
 Going under buildings, body collision
 

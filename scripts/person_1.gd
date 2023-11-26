@@ -88,7 +88,8 @@ func hit(node : Node3D, dmg_base : float = 1.0):
 	last_hit_frames = 0
 	hp -= dmg_base
 	if hp <= 0 and !dead:
-		achievement_manager.killed("citizen")
+		if is_instance_of(node, Tentacle):
+			achievement_manager.killed("citizen")
 		body.get_surface_override_material(0).next_pass.set_shader_parameter("hit_fade", 1)
 		collision_shape_3d.queue_free()
 		if node != null and node.get("caught_objects") != null:
