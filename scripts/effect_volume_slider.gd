@@ -1,7 +1,7 @@
 extends Control
 
 @onready var VolSliderMaster = $"."
-var effects_bus = AudioServer.get_bus_index("Effects")
+var effects_bus = AudioServer.get_bus_index("Master Effects")
 
 func _ready():
 	VolSliderMaster.value = AudioServer.get_bus_volume_db(effects_bus)
