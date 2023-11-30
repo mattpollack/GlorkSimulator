@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://b6wxw7ht4ph5h"]
+[gd_scene load_steps=15 format=3 uid="uid://b6wxw7ht4ph5h"]
 
 [ext_resource type="ArrayMesh" uid="uid://coraf2vm3ssi1" path="res://raw/meshes/planet.res" id="1_eamfj"]
 [ext_resource type="Script" path="res://menu.gd" id="1_hj5ag"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://nqokn4ku77dv" path="res://raw/sky-1.png" id="7_gbt17"]
 [ext_resource type="Texture2D" uid="uid://di2hxco4uj7a8" path="res://raw/play-down.png" id="7_rb77j"]
 [ext_resource type="Texture2D" uid="uid://fbl0c3k7pumi" path="res://raw/play-hover.png" id="8_rwsp0"]
+[ext_resource type="Texture2D" uid="uid://mqen8iw5dnyo" path="res://scripts/keyboardControlls.png" id="9_c50e5"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lg7so"]
 panorama = ExtResource("7_gbt17")
@@ -122,6 +123,12 @@ mouse_default_cursor_shape = 2
 texture_normal = ExtResource("6_pfg2t")
 texture_pressed = ExtResource("7_rb77j")
 texture_hover = ExtResource("8_rwsp0")
+
+[node name="Sprite2D" type="Sprite2D" parent="Control/VBoxContainer"]
+modulate = Color(1, 1, 1, 0.721569)
+position = Vector2(66, 354)
+scale = Vector2(2.24, 2.24)
+texture = ExtResource("9_c50e5")
 
 [node name="Control" type="Control" parent="Control"]
 layout_mode = 1
