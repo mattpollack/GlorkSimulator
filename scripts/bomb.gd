@@ -18,7 +18,7 @@ var collided = {}
 var target := Vector3(0, 0, 0)
 var height := 500
 var exploded := false
-var delay := 2
+var delay := 5
 
 func _ready():
 	# drop on the player

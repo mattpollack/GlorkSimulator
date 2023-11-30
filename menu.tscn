@@ -10,7 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://nqokn4ku77dv" path="res://raw/sky-1.png" id="7_gbt17"]
 [ext_resource type="Texture2D" uid="uid://di2hxco4uj7a8" path="res://raw/play-down.png" id="7_rb77j"]
 [ext_resource type="Texture2D" uid="uid://fbl0c3k7pumi" path="res://raw/play-hover.png" id="8_rwsp0"]
-[ext_resource type="Texture2D" uid="uid://mqen8iw5dnyo" path="res://scripts/keyboardControlls.png" id="9_c50e5"]
+[ext_resource type="Texture2D" uid="uid://dpni1b2dgxg7o" path="res://raw/keyboardControls.png" id="10_c8hyf"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_lg7so"]
 panorama = ExtResource("7_gbt17")
@@ -124,12 +124,6 @@ texture_normal = ExtResource("6_pfg2t")
 texture_pressed = ExtResource("7_rb77j")
 texture_hover = ExtResource("8_rwsp0")
 
-[node name="Sprite2D" type="Sprite2D" parent="Control/VBoxContainer"]
-modulate = Color(1, 1, 1, 0.721569)
-position = Vector2(66, 354)
-scale = Vector2(2.24, 2.24)
-texture = ExtResource("9_c50e5")
-
 [node name="Control" type="Control" parent="Control"]
 layout_mode = 1
 anchors_preset = 8
@@ -162,6 +156,21 @@ grow_vertical = 2
 scale = Vector2(3, 3)
 mouse_filter = 2
 texture = ExtResource("6_0nfap")
+
+[node name="controls" type="TextureRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -128.0
+offset_top = 71.0
+offset_bottom = 211.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(2, 2)
+texture = ExtResource("10_c8hyf")
 
 [node name="cam_anchor" type="Node3D" parent="."]
 

@@ -1,9 +1,5 @@
 extends Label
 
-@onready var tutorial_nodes = $UI/tutorial
-@onready var game_over = $UI/game_over
-@onready var win_menu = $UI/win_menu
-
 signal runTime(value)
 
 var time = 0

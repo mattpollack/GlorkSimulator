@@ -142,9 +142,9 @@ func _process(delta):
 	tutorial_delay += delta
 	
 	if news_playing:
-		AudioServer.set_bus_volume_db(2, lerpf(AudioServer.get_bus_volume_db(2), -30.0, delta))
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), lerpf(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")), -30.0, delta))
 	else:
-		AudioServer.set_bus_volume_db(2, lerpf(AudioServer.get_bus_volume_db(2), 0, delta))
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), lerpf(AudioServer.get_bus_volume_db(AudioServer.get_bus_index("Music")), 0, delta))
 	
 	bottom_hud.position = lerp(bottom_hud.position, bottom_hud_initial_pos, delta * 3)
 	
