@@ -17,3 +17,5 @@ static var paused := false
 static var game_over := false
 static var game_win := false
 static var tutorial := true
+static var demo := true
+static var played_a_game := false

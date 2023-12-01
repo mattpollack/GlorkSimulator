@@ -65,7 +65,11 @@ func _on_next_pressed():
 		triggerStart()
 	else:
 		triggerStop()
-		
+
+func _on_skip_pressed():
+	tutorial_i = tutorial_pannels
+	_on_next_pressed()
+
 func _input(e: InputEvent):
 	if e.is_action_pressed("pause"):
 		isPaused = !isPaused

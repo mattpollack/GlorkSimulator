@@ -39,6 +39,8 @@ var durability_upgrade_count : float = 0
 var damage : float = 1
 var damage_upgrade_count : float = 0
 var dead : bool = false
+var demo_dmg_multiplier : float = 0.3
+var demo_mass_multiplier : float = 12.0
 
 func _ready():
 	_set_tentacle_count(4)
@@ -180,6 +182,7 @@ func _process(delta):
 			AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), 0.0)
 			AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Effects"), 0.0)
 			Utils.game_over = true
+			Utils.played_a_game = true
 			)
 		death_sound.play()
 	
@@ -188,6 +191,7 @@ func _process(delta):
 	
 	if mass >= 15000:
 		Utils.game_win = true
+		Utils.played_a_game = true
 
 	mass_max = max(mass_max, mass)
 	var target_mass : float = maxf(maxf(mass, mass_max/4), 4.0) # don't let the player get to 1/4 of their highest mass achievement
@@ -304,16 +308,18 @@ func width() -> float:
 func hit(node : Node3D, dmg_base : float = 0.75):
 	if Utils.game_win:
 		return
+	var multiplier = demo_dmg_multiplier if Utils.demo else 1
 
-	var dmg = dmg_base * durability_upgrade
+	var dmg = dmg_base * durability_upgrade * multiplier
 	mass = clamp(mass - dmg, 0, 20000)
 
 func killed(n : Node3D):
+	var multiplier = demo_mass_multiplier if Utils.demo else 1
 	if n.get("mass") != null:
-		mass += n.get("mass")
+		mass += n.get("mass") * multiplier
 	else:
-		mass += 1
-	
+		mass += multiplier
+
 	killed_signal.emit()
 
 func _on_reach_area_area_entered(area):

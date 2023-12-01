@@ -24,6 +24,7 @@ var should_attack := false
 var attack_target : Node3D 
 var attack_state := "in"
 var attack_speed := 60
+var demo_damage_multiplier := 3
 
 func _ready():
 	prev_pos = self.global_position
@@ -52,7 +53,8 @@ func _process(delta):
 			"out":
 				if target_ik.global_position.distance_to(attack_target.global_position) < delta * attack_speed or tentacle_end.global_position.distance_to(target_ik.global_position) > delta * attack_speed:
 					attack_state = "in"
-					attack_target.hit(self, player.damage)
+					var damage_multipler = demo_damage_multiplier if Utils.demo else 1
+					attack_target.hit(self, player.damage * damage_multipler)
 					hit_sound.play()
 				else:
 					target_ik.global_position -= (target_ik.global_position - attack_target.global_position).normalized() * delta * attack_speed
