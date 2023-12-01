@@ -112,5 +112,4 @@ func _spawn(unit : MilitaryUnit):
 	add_child(unit_node)
 	
 	if unit.spawn_kind == SpawnKind.GROUND:
-		unit_node.global_transform = player.global_transform.rotated_local(Vector3.UP, rg.randf_range(0, 2*PI)).translated_local(Vector3(rg.randf_range(player.width() + 50, player.width() + 200), 0, 0))
-		unit_node.global_position = (unit_node.global_position as Vector3).move_toward(Vector3(0, -6000, 0), unit_node.global_position.distance_to(Vector3(0, -6000, 0)) - 5985)
+		unit_node.global_transform = Transform3D(Basis.IDENTITY, player.global_position).rotated(Vector3.UP, randf_range(0, 2*PI)).translated_local(Vector3(rg.randf_range(player.width() + 50, player.width() + 200), 0, 0))
