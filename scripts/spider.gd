@@ -212,6 +212,10 @@ func _process(delta):
 	camera.near = lerp(camera.near, target_mass / 1000, delta)
 	camera.far = lerp(camera.far, float(clamp(target_mass * 10, 4000, 64000)), delta)
 	
+	camera_arm.rotation.x = clampf(camera_arm.rotation.x, -PI/4 + 0.01, PI/4 - 0.01)
+	camera_arm.rotation.y = 0
+	camera_arm.rotation.z = 0
+	
 	limb_leg_center.scale = lerp(limb_leg_center.scale, target_scale, delta)
 	limb_arm_center.scale = lerp(limb_arm_center.scale, target_scale, delta)
 	
@@ -286,7 +290,6 @@ func _input(event : InputEvent):
 	if event is InputEventMouseMotion and Input.mouse_mode == Input.MOUSE_MODE_CAPTURED:
 		rotate_object_local(Vector3.UP, deg_to_rad(-event.relative.x * mouse_sensitivity))
 		camera_arm.rotate_object_local(Vector3.LEFT, deg_to_rad(event.relative.y * mouse_sensitivity))
-		camera_arm.rotation.x = clampf(camera_arm.rotation.x, -PI/4 + 0.01, PI/4 - 0.01)
 
 func _handle_movement(delta):
 	var dir = Input.get_axis("forward", "backward")
