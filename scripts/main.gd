@@ -12,7 +12,10 @@ extends Node3D
 @onready var pause_menu = $UI/pause_menu
 @onready var tutorial_nodes = $UI/tutorial
 @onready var tutorial_text = $UI/tutorial/dialog/_/_2/tutorial_text
+@onready var tutorial_skip = $UI/tutorial/dialog/_/_/skip
 @onready var game_over = $UI/game_over
+@onready var game_over_demo_toggle : CheckBox = $UI/game_over/Panel/CheckBox
+@onready var win_demo_toggle : CheckBox = $UI/win_menu/Panel/CheckBox
 @onready var win_menu = $UI/win_menu
 
 var show_upgrades := false
@@ -77,8 +80,16 @@ func _on_tutorial_next_pressed():
 		else:
 			c.hide()
 
+func _on_tutorial_skip_pressed():
+	tutorial_i = tutorial.size()
+	_on_tutorial_next_pressed()
+
 func _ready():
 	play_tutorial = Utils.tutorial
+	if Utils.played_a_game:
+		tutorial_skip.visible = true
+	game_over_demo_toggle.set_pressed_no_signal(Utils.demo)
+	win_demo_toggle.set_pressed_no_signal(Utils.demo)
 	
 	news_timer.timeout.connect(func():
 		news_hud.hide()
@@ -225,4 +236,5 @@ func _on_retry_pressed():
 	Utils.game_win = false
 	get_tree().change_scene_to_file("res://game.tscn")
 
-
+func _on_demo_mode_toggle(toggled_on):
+	Utils.demo = toggled_on
