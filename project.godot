@@ -13,7 +13,9 @@ config_version=5
 config/name="Glork Simulator"
 run/main_scene="res://menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
+boot_splash/image="res://raw/splashScreen.png"
 config/icon="res://raw/glorkIcon.png"
+boot_splash/minimum_display_time=1000
 
 [display]
 
