@@ -17,6 +17,9 @@ extends Node3D
 @onready var game_over_demo_toggle : CheckBox = $UI/game_over/Panel/CheckBox
 @onready var win_demo_toggle : CheckBox = $UI/win_menu/Panel/CheckBox
 @onready var win_menu = $UI/win_menu
+@onready var achievements = $UI/achievements
+@onready var controls_ui = $"UI/Controls UI"
+@onready var timer_label = $UI/timer_label
 
 var show_upgrades := false
 var upgrade_tentacle_count := 1
@@ -103,6 +106,10 @@ func _ready():
 	bottom_hud.hide()
 	tutorial_nodes.hide()
 	game_over.hide()
+	
+	achievements.show()
+	controls_ui.show()
+	timer_label.show()
 
 func _input(e : InputEvent):
 	if e.is_action_pressed("pause"):
