@@ -137,6 +137,18 @@ func _process(delta):
 		Utils.paused = true
 		tutorial_nodes.show()
 		return
+	
+	if upgrade_tentacle_count > 14:
+		$UI/upgrade_hud/_/_/_/upgrade_tentacles/bg/quantity.text = "MAX"
+	
+	if upgrade_damage_count > 14:
+		$UI/upgrade_hud/_/_/_/upgrade_damage/bg/quantity.text = "MAX"
+	
+	if upgrade_durability_count > 14:
+		$UI/upgrade_hud/_/_/_/upgrade_durability/bg/quantity.text = "MAX"
+	
+	if upgrade_speed_count > 14:
+		$UI/upgrade_hud/_/_/_/upgrade_speed/bg/quantity.text = "MAX"
 
 	# need to add a delay for some reason
 	tutorial_delay += delta
@@ -159,6 +171,9 @@ func _process(delta):
 	$UI/_/health_parent/health_container/mass_text.text = "$ %d / $ %d" % [player.mass, 15000]
 
 func _on_upgrade_tentacles_gui_input(e : InputEvent):
+	if upgrade_tentacle_count > 14:
+		return
+	
 	var price = 10 * pow(upgrade_tentacle_count, 2)
 	var price_new = 10 * pow(upgrade_tentacle_count + 1, 2)
 	
@@ -169,6 +184,8 @@ func _on_upgrade_tentacles_gui_input(e : InputEvent):
 			$UI/upgrade_hud/_/_/_/upgrade_tentacles/price.text = "$ %d" % price_new
 
 func _on_upgrade_speed_gui_input(e : InputEvent):
+	if upgrade_speed_count > 14:
+		return
 	var price = 10 * pow(upgrade_speed_count, 2)
 	var price_new = 10 * pow(upgrade_speed_count + 1, 2)
 	
@@ -179,6 +196,8 @@ func _on_upgrade_speed_gui_input(e : InputEvent):
 			$UI/upgrade_hud/_/_/_/upgrade_speed/price.text = "$ %d" % price_new
 
 func _on_upgrade_durability_gui_input(e : InputEvent):
+	if upgrade_durability_count > 14:
+		return
 	var price = 10 * pow(upgrade_durability_count, 2)
 	var price_new = 10 * pow(upgrade_durability_count + 1, 2)
 	
@@ -189,6 +208,8 @@ func _on_upgrade_durability_gui_input(e : InputEvent):
 			$UI/upgrade_hud/_/_/_/upgrade_durability/price.text = "$ %d" % price_new
 
 func _on_upgrade_damage_gui_input(e : InputEvent):
+	if upgrade_damage_count > 14:
+		return
 	var price = 10 * pow(upgrade_damage_count, 2)
 	var price_new = 10 * pow(upgrade_damage_count + 1, 2)
 	

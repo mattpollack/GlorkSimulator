@@ -15,9 +15,9 @@ curve = SubResource("Curve_7bgp0")
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_hqx3s"]
 direction = Vector3(1, 1, 1)
 spread = 180.0
-gravity = Vector3(0, 0, 0)
 initial_velocity_min = 10.0
 initial_velocity_max = 10.0
+gravity = Vector3(0, 0, 0)
 scale_max = 4.0
 scale_curve = SubResource("CurveTexture_poaos")
 

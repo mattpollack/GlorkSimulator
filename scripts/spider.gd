@@ -174,11 +174,11 @@ func _process(delta):
 		body.hide()
 		limb_arm_center.hide()
 		limb_leg_center.hide()
-		AudioServer.set_bus_volume_db(1, -30.0)
-		AudioServer.set_bus_volume_db(2, -30.0)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), -30.0)
+		AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Effects"), -30.0)
 		death_sound.finished.connect(func():
-			AudioServer.set_bus_volume_db(1, 0.0)
-			AudioServer.set_bus_volume_db(2, 0.0)
+			AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Music"), 0.0)
+			AudioServer.set_bus_volume_db(AudioServer.get_bus_index("Effects"), 0.0)
 			Utils.game_over = true
 			)
 		death_sound.play()
@@ -248,6 +248,10 @@ func _process(delta):
 			global_position += (global_position - Vector3(0, -6000, 0)).normalized() * gravity_velocity
 		else:
 			global_position += (global_position - Vector3(0, -6000, 0)).normalized()
+	
+		global_rotation.x = (global_position - Vector3(0, 6000, 0)).angle_to(Vector3(1, 0, 0))
+		global_rotation.y = (global_position - Vector3(0, 6000, 0)).angle_to(Vector3(0, 1, 0))
+		global_rotation.z = (global_position - Vector3(0, 6000, 0)).angle_to(Vector3(0, 0, 1))
 	
 	camera_arm.global_position = global_position
 
