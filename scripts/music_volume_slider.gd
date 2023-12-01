@@ -4,11 +4,10 @@ extends Control
 var music_bus = AudioServer.get_bus_index("Master Music")
 
 func _ready():
-	VolSliderMaster.value = AudioServer.get_bus_volume_db(music_bus)
-	pass
-	
+	VolSliderMaster.value = Utils.music_volume
 
 func _on_value_changed(value):
+	Utils.music_volume = value
 	AudioServer.set_bus_volume_db(music_bus,value)
 	
 	if value == -30:

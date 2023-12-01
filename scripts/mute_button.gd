@@ -2,8 +2,11 @@ extends Control
 
 var master_bus = AudioServer.get_bus_index("Master")
 
+func _ready():
+	AudioServer.set_bus_mute(master_bus, Utils.muted)
 
 func _on_toggled(button_pressed):
+	Utils.muted = button_pressed
 	AudioServer.set_bus_mute(master_bus, button_pressed)
 
 func _input(e: InputEvent):

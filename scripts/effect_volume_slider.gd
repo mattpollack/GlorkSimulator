@@ -4,11 +4,12 @@ extends Control
 var effects_bus = AudioServer.get_bus_index("Master Effects")
 
 func _ready():
-	VolSliderMaster.value = AudioServer.get_bus_volume_db(effects_bus)
+	VolSliderMaster.value = Utils.effect_volume
 	pass
 	
 
 func _on_value_changed(value):
+	Utils.effect_volume = value
 	AudioServer.set_bus_volume_db(effects_bus,value)
 	
 	if value == -30:

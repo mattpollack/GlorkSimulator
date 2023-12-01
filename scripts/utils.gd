@@ -19,3 +19,9 @@ static var game_win := false
 static var tutorial := true
 static var demo := true
 static var played_a_game := false
+
+static var muted := false
+static var music_volume := 0
+static var master_volume := 0
+static var effect_volume := 0
+
