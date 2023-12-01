@@ -58,17 +58,11 @@ func _process(delta):
 
 	# Within firing range
 	if global_position.distance_to(target) > 100 and global_position.distance_to(target) < 500:
-		# TODO: This is fine but causes the piling issue  ?
-		var rot = rotation
-		look_at(target, Vector3.UP)
-		var rot_at = rotation
-		rotation = lerp(rot, rot_at, delta)
+		look_at((player.aim_at_me.global_position - Vector3(0, 6000, 0)).normalized() * (global_position - Vector3(0, 6000, 0)).length(), Vector3.UP)
+		rotate_object_local(Vector3.RIGHT, PI/2)
 		translate_object_local(Vector3.FORWARD * delta * 20)
 	
-	var gravity = (Vector3(0, -6000, 0) - global_position).normalized() * 9.81 * delta
-	
-	if !is_on_floor():
-		velocity += gravity
+	global_position = global_position.move_toward(Vector3(0, -6000, 0), global_position.distance_to(Vector3(0, -6000, 0)) - 5984)
 	
 	move_and_slide()
 
